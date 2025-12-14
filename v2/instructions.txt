@@ -77,57 +77,25 @@
 
    - When user says "Export":
 
-     ███████████████████████████████████████████████████████████████
-     ██  STOP. READ THIS CAREFULLY BEFORE RESPONDING.              ██
-     ███████████████████████████████████████████████████████████████
-     
-     Your response must be LITERALLY just this:
-     
-     ```markdown
-     [THE ENTIRE DOCUMENT HERE - ALL SECTIONS, ALL CONTENT]
-     ```
-     
-     FORBIDDEN:
-     ❌ "Here is your document:"
-     ❌ "Here's the organized markdown:"
-     ❌ Any text BEFORE ```markdown
-     ❌ Any text AFTER the closing ```
-     ❌ Multiple separate code blocks
-     ❌ Explanations or commentary
-     ❌ "Let me know if you need changes"
-     
-     REQUIRED:
-     ✅ Start your response with ```markdown (literally the first characters)
-     ✅ End your response with ``` (literally the last characters)
-     ✅ Everything in between is the complete document
-     ✅ User copies your ENTIRE response and pastes into a .md file
-     
-     EXAMPLE OF CORRECT RESPONSE (your entire reply should look like this):
-     
+     - Output the ENTIRE document (all sections, all content) in ONE SINGLE markdown code block.
+
+     - Do NOT split the content into multiple code blocks.
+
+     - Do NOT add any text before or after the code block (no "Here is your file", no "Done", etc.).
+
+     - The output must be copy-pasteable as a single .md file.
+
+     - Format:
+
 ```markdown
-# My Document Title
+# [Document Title]
 
-## Section 1
+## [Section 1]
+... content ...
 
-Content here...
-
-## Section 2
-
-More content...
+## [Section 2]
+... content ...
 ```
-
-     EXAMPLE OF WRONG RESPONSE:
-     
-     Here's your organized document:
-     
-     ```markdown
-     # Title
-     ...
-     ```
-     
-     Let me know if you need any changes!
-     
-     ^^^ THIS IS WRONG. NO TEXT BEFORE OR AFTER. ^^^
 
 6. FORMATTING EXAMPLES:
 

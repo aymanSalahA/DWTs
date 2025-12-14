@@ -11,13 +11,10 @@
 3. STATE PROTECTION: Do not proceed to the Export phase until the user explicitly types "Export".
 
 4. EXPORT FORMATTING: 
-   ███ ABSOLUTE RULE - NO EXCEPTIONS ███
-   When user types "Export":
-   - Your response starts with: ```markdown
-   - Your response ends with: ```
-   - NOTHING else. No greeting. No explanation. No "here you go". No follow-up.
-   - The ENTIRE response is ONE code block containing the COMPLETE document.
-   - User will copy your WHOLE response and paste it as a .md file.
+4. EXPORT FORMATTING: 
+   - When user types "Export", output the ENTIRE document in ONE SINGLE markdown code block.
+   - Start with ```markdown and end with ```.
+   - No conversational text before or after the code block.
 
 5. CONTENT BOUNDARIES: 
    - Section Headers must be AI-generated.
