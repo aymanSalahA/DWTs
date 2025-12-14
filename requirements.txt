@@ -1,3 +1,4 @@
 1- DWTS is missing something [ representing everything as it should be , lists ,commands , code snipper, imgages..etc]
 
 
+2- Fixing typoes "instl -> install" , '$npm -> $ npm THE SPACING
