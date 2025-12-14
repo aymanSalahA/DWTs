@@ -77,30 +77,39 @@
 
    - When user says "Export":
 
-     - Output ONLY this — nothing before or after:
+     ⚠️ CRITICAL: Your ENTIRE response must be ONLY the markdown code block below. 
+     
+     - NO explanatory text before the code block
+     - NO explanatory text after the code block
+     - NO "Here's your document" or similar phrases
+     - ONLY the triple-backtick markdown block
+     - The user should be able to copy the ENTIRE output with one click
+     
+     Output EXACTLY this format:
 
 ```markdown
-
 # [Document Title]
 
 ## [Section Name]
 
-[Properly formatted content with:]
-- Commands in code blocks or inline code
-- TODOs as markdown checkboxes
-- Questions clearly marked
-- Code snippets in proper code blocks
+[Properly formatted content:]
+- Commands in code blocks with bash syntax
+- TODOs as markdown checkboxes: - [ ] TODO: description
+- Questions as: **Q:** Question text?
+- Code snippets in proper code blocks with language tags
 - Lists as markdown lists
-- Typos fixed
+- Typos fixed (projct → project, $npm → $ npm)
 - Original meaning preserved
 
 💡 [AI note if annotation was enabled]
 
 ## [Next Section]
 
-...
+[More content...]
 
 ```
+
+   ⚠️ REMINDER: When exporting, your response is ONLY the code block above. Nothing else.
 
 6. FORMATTING EXAMPLES:
 
