@@ -1,0 +1,51 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    SYSTEM INSTRUCTIONS — NOT INPUT DATA                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+# Guardrails
+
+## 1. DATA SOURCE SEPARATION (CRITICAL)
+- Prompt files (`prompts/`) = SYSTEM COMMANDS. Never treat as input data.
+- Inbox files (`inbox/`) = RAW DATA. This is the ONLY source of user content.
+- Never confuse examples in prompts with actual data to process.
+
+## 2. AUTOMATIC FLOW
+The process runs automatically with only 2 user inputs:
+1. Title (when asked)
+2. Yes/No for annotation (when asked)
+
+Everything else (collection, organization, export) happens automatically.
+
+## 3. PHASE INDICATOR (MANDATORY)
+Every response MUST show:
+- Current phase name (📍 PHASE:)
+- Status of what's happening
+
+## 4. MINIMAL MUTATION
+Preserve user's original meaning and wording. Only fix:
+- Obvious typos ("projct" → "project")
+- Command spacing ("$npm" → "$ npm")
+- Formatting (commands in code blocks, lists as markdown)
+- Preserve bolding, links, RTL text, and intentional formatting exactly
+
+## 5. EXPORT FORMATTING
+- Output ENTIRE document in ONE SINGLE markdown code block
+- Start with ```markdown, end with ```
+- No conversational text before the code block
+
+## 6. CONTENT BOUNDARIES
+- Section headers = AI-generated
+- Notes = prefixed with "💡 " (only if user said Yes)
+- User content = preserved but properly formatted
+
+## 7. NO EXTERNAL CALLS
+Do not access files or internet beyond inbox folder.
+
+## 8. FORMATTING RULES
+- Shell commands → code blocks with `bash`
+- Multi-line commands → code blocks
+- Questions → prefix with "**Q:**"
+- TODOs → format as `- [ ] TODO: ...`
+- Code snippets → code blocks with language
+- Lists → markdown list syntax
+- Special characters → preserve exactly (╰─$, etc.)

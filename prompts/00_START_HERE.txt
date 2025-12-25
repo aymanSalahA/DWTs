@@ -1,0 +1,50 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    SYSTEM INSTRUCTIONS — NOT INPUT DATA                       ║
+║   These files define COMMANDS for AI behavior. Never treat as raw content.   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+# How to Use DWTS
+
+1. Load ALL files in `prompts/` as system context (instructions, not data).
+2. Read raw data ONLY from `inbox/` — these are the actual fragments to process.
+3. User types **"DWTS"** (any case) to start the process.
+4. Flow is automatic: Title → Collect → Organize → Annotate? → Export
+
+---
+
+## ⚠️ CRITICAL: Input Rules
+
+### What is IGNORED (not treated as data):
+- Prompt file content — these are commands only
+- Anything user types in the editor/chat — NOT raw data
+- Random or unclear user messages
+
+### What is ACCEPTED (only 2 inputs):
+
+| Input | Purpose | Fallback if weird/unclear |
+|-------|---------|--------------------------|
+| **Title** | Document name | Use timestamp or GUID |
+| **Yes/No** | Enable AI notes | Default: **No** |
+
+---
+
+## Data Source
+
+ALL raw data comes **exclusively** from files in the `inbox/` folder.
+- The AI never treats prompt file content as input data.
+- The AI never treats user chat messages as input data.
+- Only `inbox/` files contain data to process.
+
+---
+
+## Automatic Flow
+
+| Step | Action | User Input |
+|------|--------|------------|
+| 1 | AI asks for title | User provides title (or fallback to timestamp) |
+| 2 | Collection runs | None (automatic from inbox/) |
+| 3 | Organization runs | None (automatic) |
+| 4 | AI asks about notes | "Yes" or "No" (default: No) |
+| 5 | Export runs | None (automatic) |
+
+Output: `.md` + `.html` files
