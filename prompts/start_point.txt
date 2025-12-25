@@ -1,0 +1,8 @@
+To use DWTS:
+
+1. Load this file + all files in `prompts/` as context.
+2. Read raw data from `inbox/` — do NOT modify these files.
+3. Process in order: collect → organize → fix → export.
+4. Write outputs to `export/`.
+
+Raw data is sacred. Edits are marked. Export is dual: .md + .html.

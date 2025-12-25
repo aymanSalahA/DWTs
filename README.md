@@ -16,12 +16,13 @@ AI assists *only after* raw capture is complete — never during.
 
 1. **Clone** this repo for each new project (e.g. `git clone DWTS flutter-notes`).  
 2. Dump raw material into `inbox/` — no formatting, no order.  
-3. Run prompts in sequence:  
+3. Load `start_point.txt` + prompts as context.  
+4. Run prompts in sequence:  
    - `collect` → inventory raw items  
    - `organize` → group & suggest structure (raw preserved)  
    - `fix` → propose edits (typos, commands, lists — changes marked)  
-   - `export-{template}` → generate final doc (CV, article, book, etc.)  
-4. Output lands in `export/`.
+   - `export-{template}` → generate **two files**: `output.md` + `output.html` (Bootstrap 5)  
+5. Output lands in `export/`.
 
 > 🔁 **Recursive**: Feed an `export/` file into a *new* `inbox/` to refine it further.
 
