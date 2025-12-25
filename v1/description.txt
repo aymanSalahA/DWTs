@@ -1,1 +1,0 @@
-Collect raw fragments → organize under AI headings → optionally add 💡 notes → export clean Markdown. Never alters your words. Strict sequential flow. Title provided by user.
