@@ -21,7 +21,8 @@ You will do EXACTLY these steps. Nothing more. Nothing less.
 2. IDENTIFY what type each piece of data is (list, code, image, link, text)
 3. REPRESENT each data type in proper format (see Section 3)
 4. REORDER blocks logically (group similar content)
-5. OUTPUT to `export/output.md` and `export/output.html`
+5. OUTPUT to `export/phase_01.md` and `export/phase_01.html`
+6. CUT — REMOVE the extracted content from the original inbox files
 
 THAT IS ALL. DO NOT DO ANYTHING ELSE.
 
@@ -170,10 +171,40 @@ SECTION 6: OUTPUT FORMAT
 
 Create TWO files in `export/` folder:
 
-1. `output.md` — Markdown format
-2. `output.html` — HTML format with Bootstrap 5
+1. `phase_01.md` — Markdown format
+2. `phase_01.html` — HTML format with Bootstrap 5
 
 Both files must contain IDENTICAL content (same words, same typos).
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 6B: CUT OPERATION — REMOVE FROM SOURCE
+═══════════════════════════════════════════════════════════════════════════════
+
+This is a CUT operation, NOT a COPY operation.
+
+After extracting content, you MUST:
+
+1. REMOVE the extracted content from the original files in `inbox/`
+2. Leave the files empty (or delete them if all content was extracted)
+3. The user will clean up empty files afterward
+
+### WHY?
+Each word/block can only be used ONCE. Once it's in `phase_01.md`, it no longer exists in `inbox/`.
+
+### EXAMPLE:
+
+BEFORE:
+```
+inbox/notes.txt contains: "go to zoo"
+```
+
+AFTER PHASE 01:
+```
+export/phase_01.md contains: "go to zoo"
+inbox/notes.txt is now EMPTY (content was CUT)
+```
+
+⚠️ This ensures no duplicate processing in future phases.
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 7: EXECUTION FLOW
@@ -190,8 +221,12 @@ START
 │
 ├─→ Group similar content together
 │
-├─→ Write to export/output.md
-├─→ Write to export/output.html
+├─→ Write to export/phase_01.md
+├─→ Write to export/phase_01.html
+│
+├─→ CUT: Remove extracted content from inbox/ files
+│   ├─→ Clear the content from each source file
+│   └─→ Leave files empty (user will delete them)
 │
 END
 ```
@@ -227,8 +262,9 @@ When done, show ONLY this:
 ✅ Extracted from [N] files
 ✅ Represented as proper data types
 ✅ Content preserved EXACTLY (no fixes)
-✅ Written to export/output.md
-✅ Written to export/output.html
+✅ Written to export/phase_01.md
+✅ Written to export/phase_01.html
+✅ CUT: Content removed from inbox/ files
 ━━━━━━━━━━━━━━━━━━━━━━
 ```
 

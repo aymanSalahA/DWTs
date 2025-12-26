@@ -38,8 +38,10 @@ Execute Phase 01.
 
 The AI will process `inbox/` and create:
 
--   `export/output.md`
--   `export/output.html`
+-   `export/phase_01.md`
+-   `export/phase_01.html`
+
+And will **CUT** (remove) the content from `inbox/` files.
 
 ---
 
@@ -64,14 +66,15 @@ DWTs/
 
 ---
 
-## Phase 01: Raw Extraction
+## Phase 01: Raw Extraction (CUT Operation)
 
 **What it does:**
 
 -   Reads ALL files from `inbox/`
 -   Represents each data type properly (lists, images, code, etc.)
 -   Reorders blocks logically
--   Outputs to `export/` as `.md` and `.html`
+-   Outputs to `export/phase_01.md` and `export/phase_01.html`
+-   **CUTS** content from source — removes it from `inbox/` files
 
 **What it STRICTLY NEVER does:**
 
@@ -88,6 +91,14 @@ DWTs/
 INPUT:  "too the zou go"
 OUTPUT: "go too the zou"    ← Content preserved, just reordered
 WRONG:  "go to the zoo"     ← VIOLATION (spelling was fixed)
+```
+
+**CUT Operation:**
+
+```
+BEFORE: inbox/notes.txt contains "hello world"
+AFTER:  export/phase_01.md contains "hello world"
+        inbox/notes.txt is now EMPTY
 ```
 
 ---
