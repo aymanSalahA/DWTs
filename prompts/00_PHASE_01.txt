@@ -20,68 +20,41 @@ You will do EXACTLY these steps. Nothing more. Nothing less.
 1. READ all files from `inbox/` folder (including subfolders)
 2. IDENTIFY what type each piece of data is (list, code, image, link, text)
 3. REPRESENT each data type in proper format (see Section 3)
-4. REORDER blocks logically (group similar content)
-5. OUTPUT to `export/phase_01.md` and `export/phase_01.html`
-6. CUT — REMOVE the extracted content from the original inbox files
+4. GROUP related content into blocks/cards (see Section 5)
+5. ADD simple titles/headers for each block (see Section 4)
+6. OUTPUT to `export/phase_01.md` and `export/phase_01.html`
+7. CUT — REMOVE the extracted content from the original inbox files
 
 THAT IS ALL. DO NOT DO ANYTHING ELSE.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 2: ABSOLUTE PROHIBITIONS — READ THREE TIMES
+SECTION 2: CONTENT PRESERVATION — THE #1 RULE
 ═══════════════════════════════════════════════════════════════════════════════
 
-🚫🚫🚫 YOU ARE FORBIDDEN FROM DOING THE FOLLOWING 🚫🚫🚫
+🔴 CRITICAL: Every piece of raw data must be SEARCHABLE (Ctrl+F) 🔴
 
-❌ DO NOT fix typos
-   WRONG: "projct" → "project"
-   RIGHT: "projct" → "projct"
+If user copies ANY text from original raw files and does Ctrl+F in the output,
+they MUST find it EXACTLY as it was written.
 
-❌ DO NOT fix spelling
-   WRONG: "zou" → "zoo"
-   RIGHT: "zou" → "zou"
-
-❌ DO NOT fix grammar
-   WRONG: "me go store" → "I go to the store"
-   RIGHT: "me go store" → "me go store"
-
-❌ DO NOT add words
-   WRONG: "install npm" → "First, install npm"
-   RIGHT: "install npm" → "install npm"
-
-❌ DO NOT remove words
-   WRONG: "please install npm now" → "install npm"
-   RIGHT: "please install npm now" → "please install npm now"
-
-❌ DO NOT add punctuation
-   WRONG: "hello world" → "Hello world."
-   RIGHT: "hello world" → "hello world"
-
-❌ DO NOT capitalize
-   WRONG: "react" → "React"
-   RIGHT: "react" → "react"
-
-❌ DO NOT add explanations or notes
-   WRONG: Adding "💡 Note: this command does X"
-   RIGHT: No notes. Ever.
-
+❌ DO NOT fix typos — "projct" stays "projct"
+❌ DO NOT fix spelling — "zou" stays "zou"  
+❌ DO NOT fix grammar — "me go store" stays "me go store"
+❌ DO NOT add words to user content
+❌ DO NOT remove words from user content
+❌ DO NOT change punctuation in user content
+❌ DO NOT capitalize user content
 ❌ DO NOT interpret or translate
-   WRONG: Changing Arabic/Hebrew/other text
-   RIGHT: Keep exactly as-is
 
-❌ DO NOT change word order within a sentence
-   WRONG: "npm install first" → "first install npm"
-   RIGHT: "npm install first" → "npm install first"
+### TEST YOURSELF:
+Copy any sentence from raw data → Ctrl+F in output → Must find EXACT match
 
-═══════════════════════════════════════════════════════════════════════════════
-⚠️ REPEAT: IF YOU DO ANY OF THE ABOVE, YOU HAVE FAILED ⚠️
-═══════════════════════════════════════════════════════════════════════════════
+If you cannot find an exact match, YOU HAVE FAILED.
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 3: DATA TYPE REPRESENTATION
 ═══════════════════════════════════════════════════════════════════════════════
 
-You MUST represent data in its proper format.
-The CONTENT stays exactly the same. Only the FORMAT changes.
+Represent data in its proper format. Content stays EXACTLY the same.
 
 | If you see...          | Represent as...              |
 |------------------------|------------------------------|
@@ -93,121 +66,149 @@ The CONTENT stays exactly the same. Only the FORMAT changes.
 | Quote                  | Blockquote (> text)          |
 | Regular text           | Paragraph                    |
 
-### CRITICAL EXAMPLE:
-
-RAW INPUT:
-```
-buy milk
-buy bread
-npm instal pakage
-```
-
-✅ CORRECT OUTPUT:
-```markdown
-- buy milk
-- buy bread
-
-```bash
-npm instal pakage
-```
-```
-
-⚠️ NOTICE: "instal" and "pakage" are STILL MISSPELLED.
-⚠️ We only changed the FORMAT, not the CONTENT.
-
-❌ WRONG OUTPUT (DO NOT DO THIS):
-```markdown
-- buy milk
-- buy bread
-
-```bash
-npm install package
-```
-```
-↑↑↑ THIS IS WRONG BECAUSE "instal" WAS CHANGED TO "install" ↑↑↑
-
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 4: THE GOLDEN RULE — MEMORIZE THIS
+SECTION 4: TITLES AND HEADERS — SIMPLE LANGUAGE ONLY
 ═══════════════════════════════════════════════════════════════════════════════
 
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║   INPUT:  "too the zou go"                                                ║
-║   OUTPUT: "go too the zou"                                                ║
-║                                                                           ║
-║   ✅ CORRECT — Blocks reordered, content IDENTICAL                        ║
-║                                                                           ║
-║   ❌ WRONG — "go to the zoo" (YOU CHANGED THE CONTENT!)                   ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
+You MAY add titles and headers to organize content.
 
-Ask yourself before outputting:
-- Did I change ANY word? → YOU FAILED
-- Did I add ANY word? → YOU FAILED  
-- Did I remove ANY word? → YOU FAILED
-- Did I fix ANY spelling? → YOU FAILED
-- Did I fix ANY grammar? → YOU FAILED
+⚠️ RULES FOR TITLES:
+
+1. Use SIMPLE, EASY words only
+   ✅ GOOD: "Notes", "Links", "Questions", "Setup Steps"
+   ❌ BAD: "Preliminary Considerations", "Implementation Details"
+
+2. Keep titles SHORT (2-4 words max)
+   ✅ GOOD: "How to Install"
+   ❌ BAD: "Comprehensive Installation Instructions and Guidelines"
+
+3. Use everyday language
+   ✅ GOOD: "Things to Do", "Problems", "Ideas"
+   ❌ BAD: "Action Items", "Issues Encountered", "Conceptual Framework"
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 5: WHAT "REORDER" MEANS
+SECTION 5: GROUPING — SMART BLOCKS/CARDS
 ═══════════════════════════════════════════════════════════════════════════════
 
-REORDER means moving WHOLE BLOCKS around. NOT changing words.
+All content MUST be organized into visual blocks/cards.
 
-✅ ALLOWED:
-- Move a paragraph from bottom to top
-- Group all commands together
-- Group all list items together
-- Put related content near each other
+### SMART GROUPING RULES:
 
-❌ NOT ALLOWED:
-- Change "install npm first" to "first install npm"
-- Merge two sentences into one
-- Split one sentence into two
+1. Keep RELATED content together
+   - If a question appears after some notes, keep the question WITH those notes
+   - Questions belong in the block they relate to
+
+2. Do NOT group by type only
+   ❌ WRONG: Put all questions in one "Questions" block
+   ✅ RIGHT: Keep each question with its related content
+
+3. ONLY group unrelated items together
+   - If there are random/standalone questions with no context → group them
+   - If there are random notes with no clear relation → group them
+
+### EXAMPLE:
+
+RAW DATA:
+```
+how to install flutter
+run flutter doctor
+what if flutter doctor fails?
+how to make responsive UI
+use MediaQuery for sizing
+```
+
+✅ CORRECT GROUPING:
+```
+[Block: Flutter Setup]
+- how to install flutter
+- run flutter doctor
+- Q: what if flutter doctor fails?
+
+[Block: Responsive UI]
+- how to make responsive UI
+- use MediaQuery for sizing
+```
+
+❌ WRONG GROUPING:
+```
+[Block: Commands]
+- run flutter doctor
+
+[Block: Questions]
+- what if flutter doctor fails?
+- (separated from related content!)
+```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 6: OUTPUT FORMAT
+SECTION 6: VISUAL STYLING — HIGHLIGHT AI ADDITIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+### HTML Styling Rules:
+
+1. **Theme**: Moderate colors (not dark, not very light)
+   - Background: Light gray (#f5f5f5 or similar)
+   - Cards: White with subtle shadow
+   - Text: Dark gray (#333)
+
+2. **AI-Added Content**: Highlight with LIGHT PURPLE
+   - Titles added by AI → light purple background (#e8daef or similar)
+   - Headers added by AI → light purple background
+   - Any organizing text AI added → light purple
+
+3. **User Raw Data**: NO highlight
+   - User's original content stays on white/neutral background
+   - This makes it clear what is AI-added vs original
+
+### Example CSS:
+```css
+.ai-added {
+    background-color: #e8daef;  /* Light purple */
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.user-content {
+    background-color: white;
+}
+
+body {
+    background-color: #f5f5f5;  /* Moderate gray, not dark */
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 7: OUTPUT FORMAT
 ═══════════════════════════════════════════════════════════════════════════════
 
 Create TWO files in `export/` folder:
 
 1. `phase_01.md` — Markdown format
-2. `phase_01.html` — HTML format with Bootstrap 5
+2. `phase_01.html` — HTML format with Bootstrap 5 + custom styling
 
 Both files must contain IDENTICAL content (same words, same typos).
+User's raw data must be searchable in both files.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 6B: CUT OPERATION — REMOVE FROM SOURCE
+SECTION 8: CUT OPERATION — REMOVE FROM SOURCE
 ═══════════════════════════════════════════════════════════════════════════════
 
 This is a CUT operation, NOT a COPY operation.
 
 After extracting content, you MUST:
-
 1. REMOVE the extracted content from the original files in `inbox/`
 2. Leave the files empty (or delete them if all content was extracted)
 3. The user will clean up empty files afterward
 
-### WHY?
-Each word/block can only be used ONCE. Once it's in `phase_01.md`, it no longer exists in `inbox/`.
-
-### EXAMPLE:
-
-BEFORE:
-```
-inbox/notes.txt contains: "go to zoo"
-```
-
-AFTER PHASE 01:
-```
-export/phase_01.md contains: "go to zoo"
-inbox/notes.txt is now EMPTY (content was CUT)
-```
-
-⚠️ This ensures no duplicate processing in future phases.
-
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 7: EXECUTION FLOW
+SECTION 9: EXECUTION FLOW
 ═══════════════════════════════════════════════════════════════════════════════
 
 ```
@@ -217,41 +218,39 @@ START
 │
 ├─→ For EACH piece of content:
 │   ├─→ Identify type (list? code? image? text?)
-│   └─→ Keep content EXACTLY as-is
+│   └─→ Keep content EXACTLY as-is (Ctrl+F must work)
 │
-├─→ Group similar content together
+├─→ Group into smart blocks (related content together)
+│
+├─→ Add simple titles (highlight in light purple)
 │
 ├─→ Write to export/phase_01.md
-├─→ Write to export/phase_01.html
+├─→ Write to export/phase_01.html (moderate theme, purple highlights)
 │
 ├─→ CUT: Remove extracted content from inbox/ files
-│   ├─→ Clear the content from each source file
-│   └─→ Leave files empty (user will delete them)
 │
 END
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 8: SELF-CHECK BEFORE OUTPUT
+SECTION 10: SELF-CHECK BEFORE OUTPUT
 ═══════════════════════════════════════════════════════════════════════════════
 
 Before you output, check ALL of these:
 
-□ Every word in my output exists in the input (exact match, including typos)
-□ I did NOT add any words
-□ I did NOT remove any words
-□ I did NOT fix any spelling
-□ I did NOT fix any grammar
-□ I did NOT add punctuation
-□ I did NOT capitalize anything
-□ Lists are rendered as proper lists
-□ Code is in code blocks
-□ Images are properly embedded
+□ Ctrl+F test: Any text from raw data can be found exactly in output
+□ I did NOT fix any typos, spelling, or grammar
+□ Titles use simple, easy words (no complex vocabulary)
+□ Content is grouped in visual blocks/cards
+□ Related content stays together (questions near their context)
+□ AI-added content (titles) is highlighted in light purple
+□ Theme is moderate (not dark, not very light)
+□ Lists are proper lists, code is in code blocks
 
 If ANY checkbox fails, START OVER.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 9: COMPLETION MESSAGE
+SECTION 11: COMPLETION MESSAGE
 ═══════════════════════════════════════════════════════════════════════════════
 
 When done, show ONLY this:
@@ -260,8 +259,9 @@ When done, show ONLY this:
 📍 PHASE 01: COMPLETE
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ Extracted from [N] files
-✅ Represented as proper data types
-✅ Content preserved EXACTLY (no fixes)
+✅ Content preserved exactly (Ctrl+F works)
+✅ Grouped into [N] blocks/cards
+✅ AI titles highlighted in light purple
 ✅ Written to export/phase_01.md
 ✅ Written to export/phase_01.html
 ✅ CUT: Content removed from inbox/ files
@@ -272,17 +272,10 @@ When done, show ONLY this:
 ⚠️ FINAL WARNING ⚠️
 ═══════════════════════════════════════════════════════════════════════════════
 
-If you "fix" or "improve" ANYTHING:
-- A typo
-- A grammar mistake
-- A spelling error
-- Missing punctuation
+The #1 test: Can user Ctrl+F any text from raw data and find it EXACTLY?
 
-YOU HAVE VIOLATED THIS PHASE.
-
-The human KNOWS there are mistakes. That is intentional.
-Your job is NOT to fix them.
-Your job is to PRESERVE them EXACTLY.
+If YES → You did it right.
+If NO → You violated the rules.
 
 ═══════════════════════════════════════════════════════════════════════════════
 END OF PHASE 01 INSTRUCTIONS

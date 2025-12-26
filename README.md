@@ -25,23 +25,15 @@ Copy the content of `prompts/00_PHASE_01.txt` and paste it as your first message
 Send a message like:
 
 ```
-Apply Phase 01 to the inbox folder.
-```
-
-or simply:
-
-```
 Execute Phase 01.
 ```
 
 ### Step 5: Get Output
 
-The AI will process `inbox/` and create:
+The AI will:
 
--   `export/phase_01.md`
--   `export/phase_01.html`
-
-And will **CUT** (remove) the content from `inbox/` files.
+-   Create `export/phase_01.md` and `export/phase_01.html`
+-   **CUT** (remove) the content from `inbox/` files
 
 ---
 
@@ -57,71 +49,74 @@ DWTs/
 
 ---
 
-## ⚠️ Critical: Commands vs Data
+## Phase 01: What It Does (Quick List)
 
-| Source     | Purpose                                           |
-| ---------- | ------------------------------------------------- |
-| `prompts/` | **PHASE COMMANDS** — instructions for AI behavior |
-| `inbox/`   | **RAW DATA** — the actual content to process      |
+| #   | Action        | Details                                               |
+| --- | ------------- | ----------------------------------------------------- |
+| 1   | **Read**      | All files from `inbox/`                               |
+| 2   | **Preserve**  | Content exactly as-is (Ctrl+F must find it)           |
+| 3   | **Represent** | Lists as lists, code as code blocks, images as images |
+| 4   | **Group**     | Related content into blocks/cards (smart grouping)    |
+| 5   | **Title**     | Add simple headers (light purple highlight)           |
+| 6   | **Style**     | Moderate theme (not dark, not light)                  |
+| 7   | **Output**    | `phase_01.md` + `phase_01.html`                       |
+| 8   | **CUT**       | Remove content from inbox files                       |
 
 ---
 
-## Phase 01: Raw Extraction (CUT Operation)
-
-**What it does:**
-
--   Reads ALL files from `inbox/`
--   Represents each data type properly (lists, images, code, etc.)
--   Reorders blocks logically
--   Outputs to `export/phase_01.md` and `export/phase_01.html`
--   **CUTS** content from source — removes it from `inbox/` files
-
-**What it STRICTLY NEVER does:**
+## Phase 01: What It NEVER Does
 
 -   ❌ Fix typos ("projct" stays "projct")
--   ❌ Fix spelling ("zou" stays "zou", NOT "zoo")
+-   ❌ Fix spelling ("zou" stays "zou")
 -   ❌ Fix grammar
--   ❌ Add words
--   ❌ Remove words
--   ❌ Add explanations or notes
+-   ❌ Add/remove words from raw content
+-   ❌ Use complex vocabulary for titles
 
-**The Golden Rule:**
+---
+
+## Ctrl+F Test
+
+**The #1 rule**: Copy any text from your raw files → Ctrl+F in output → Must find EXACT match.
+
+If you can't find it, the AI violated the rules.
+
+---
+
+## Smart Grouping
+
+Phase 01 groups content **smartly**:
+
+✅ **RIGHT**: Keep questions with their related content
 
 ```
-INPUT:  "too the zou go"
-OUTPUT: "go too the zou"    ← Content preserved, just reordered
-WRONG:  "go to the zoo"     ← VIOLATION (spelling was fixed)
+[Block: Flutter Setup]
+- how to install flutter
+- Q: what if it fails?
 ```
 
-**CUT Operation:**
+❌ **WRONG**: Group all questions together
 
 ```
-BEFORE: inbox/notes.txt contains "hello world"
-AFTER:  export/phase_01.md contains "hello world"
-        inbox/notes.txt is now EMPTY
+[Block: Questions]
+- Q: what if it fails? ← separated from context!
 ```
 
 ---
 
-## Quick Start Commands
+## Visual Highlights
 
-After loading Phase 01 into a new session:
-
-| Command            | What it does                    |
-| ------------------ | ------------------------------- |
-| `Execute Phase 01` | Process inbox and create output |
-| `Apply Phase 01`   | Same as above                   |
-| `Run Phase 01`     | Same as above                   |
+-   **AI-added content** (titles, headers): Light purple background
+-   **User raw data**: White/neutral background
+-   **Theme**: Moderate (not dark, not very light)
 
 ---
 
 ## Tips for Stubborn AI Models
 
-If a model keeps "fixing" things, try adding:
+If a model keeps "fixing" things:
 
 ```
 REMINDER: Do NOT fix ANY typos, spelling, or grammar.
 The word "projct" must stay as "projct".
-The word "zou" must stay as "zou".
-I know there are mistakes. Keep them.
+Ctrl+F from raw data must work in output.
 ```
