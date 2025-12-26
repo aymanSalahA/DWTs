@@ -1,0 +1,177 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           PHASE 01: RAW EXTRACTION                           ║
+║         SELF-CONTAINED — PRESERVE CONTENT — REPRESENT PROPERLY               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+# PHASE 01 — RAW DATA EXTRACTION & REPRESENTATION
+
+This phase is **100% SELF-CONTAINED**. 
+
+## Mission
+
+Take ALL raw data from `inbox/` → Represent each data type properly → Reorder blocks → Output as Markdown + HTML
+
+---
+
+## ⛔ CONTENT RULES — ZERO EXCEPTIONS
+
+### WHAT YOU DO:
+✅ Read all files from `inbox/` folder (recursively)
+✅ Collect every character, word, phrase, block exactly as written
+✅ Represent each content type in its proper format (see below)
+✅ Reorder blocks into a logical sequence (group related content)
+✅ Output to `export/` as `.md` and `.html` files
+
+### WHAT YOU NEVER DO:
+❌ Fix typos — "projct" stays "projct"
+❌ Fix grammar — "too the zou" stays "too the zou"
+❌ Fix spelling — "zoo" typed as "zou" stays "zou"
+❌ Add explanations, notes, or comments
+❌ Interpret or translate content
+❌ Add words that weren't in raw data
+❌ Remove words that were in raw data
+
+---
+
+## 🔴 THE GOLDEN RULE
+
+    INPUT: "too the zou go"
+    OUTPUT: "go too the zou"
+
+    ✅ CORRECT — Reordered, content preserved exactly
+    ❌ WRONG — "go to the zoo" (fixed spelling = VIOLATION)
+
+**If it wasn't in the raw data, it cannot be in the output.**
+**If it had a typo in raw data, it has that typo in output.**
+
+---
+
+## 📊 DATA TYPE REPRESENTATION
+
+Represent each content type in its proper format — but **content stays exactly as written**:
+
+| Data Type | Representation | Example |
+|-----------|----------------|---------|
+| **List items** | As markdown list (`-` or `1.`) | `- item one` |
+| **Images** | As image embed | `![alt](path)` or `<img>` |
+| **Links** | As markdown links | `[text](url)` |
+| **Code/Commands** | As code blocks | ` ```bash ` |
+| **Tables** | As markdown tables | `| col | col |` |
+| **Quotes** | As blockquotes | `> quote text` |
+| **Plain text** | As paragraphs | Normal text |
+
+### Key Point:
+The **content** inside stays EXACTLY as raw data.
+Only the **representation** changes to proper format.
+
+### Example:
+
+**RAW INPUT:**
+```
+buy milk
+buy bread  
+npm instal pakage
+```
+
+**VALID OUTPUT:**
+```markdown
+- buy milk
+- buy bread
+
+```bash
+npm instal pakage
+```
+```
+
+Note: "instal" and "pakage" stay misspelled. But:
+- List items become a proper list
+- Command becomes a code block
+
+---
+
+## How Reordering Works
+
+You MAY reorder blocks in this manner:
+
+| Action | Allowed |
+|--------|---------|
+| Move entire blocks/fragments | ✅ YES |
+| Group similar content together | ✅ YES |
+| Sequence fragments logically | ✅ YES |
+| Change word order within a sentence | ❌ NO |
+
+---
+
+## Output Requirements
+
+1. **Markdown file** (`export/output.md`)
+   - Contains all raw data, properly represented
+   - Lists as lists, code as code blocks, images as embeds
+   - Content preserved exactly (typos and all)
+
+2. **HTML file** (`export/output.html`)
+   - Same content rendered as HTML
+   - Proper HTML elements for each data type
+   - Bootstrap 5 styling for clean appearance
+
+---
+
+## Execution Flow
+
+```
+START
+  ├─→ Read ALL files in inbox/ (including subdirectories)
+  ├─→ Identify data types (list, code, image, text, etc.)
+  ├─→ Represent each in proper format (content unchanged)
+  ├─→ Determine logical order (by topic/relatedness)
+  ├─→ Arrange blocks in that order
+  ├─→ Write to export/output.md
+  ├─→ Write to export/output.html
+END
+```
+
+---
+
+## Verification Checklist (Before Output)
+
+Before producing output, verify:
+
+- [ ] Every word in output exists in input (exact match)
+- [ ] No words added that weren't in input
+- [ ] No spelling corrections made
+- [ ] No grammar corrections made
+- [ ] Lists are rendered as proper lists
+- [ ] Code/commands are in code blocks
+- [ ] Images are properly embedded
+- [ ] Links are properly formatted
+
+---
+
+## Phase Status
+
+📍 **PHASE 01: RAW EXTRACTION**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Status: Ready to extract
+
+When complete, output:
+```
+📍 PHASE 01: COMPLETE
+✅ Extracted [N] items from [M] files
+✅ Represented as proper data types
+✅ Reordered into logical blocks
+✅ Written to export/output.md
+✅ Written to export/output.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Raw extraction complete. Content preserved exactly.
+```
+
+---
+
+## This Phase Does NOT:
+
+- Fix typos, spelling, or grammar
+- Add explanatory notes
+- Add words that weren't in source
+- Ask for user input
+
+**It is EXTRACT + REPRESENT + REORDER. Content stays exactly as written.**

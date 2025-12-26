@@ -2,64 +2,7 @@
 
 **D**ump → **W**ork → **T**ransform → **S**tructure
 
-A lightweight system to turn **scattered raw input** into **structured, styled output** — generating both **Markdown** and **HTML** (Bootstrap 5) with minimal user interaction.
-
----
-
-## ⚠️ Critical: Commands vs Data
-
-| Source     | Purpose                                            |
-| ---------- | -------------------------------------------------- |
-| `prompts/` | **SYSTEM COMMANDS** — instructions for AI behavior |
-| `inbox/`   | **RAW DATA** — the actual content to process       |
-
----
-
-## Automatic Flow
-
-```
-"DWTS" → Title? → Collection → Organize → Annotate? → Export
-   ↑         ↑                                ↑
-(trigger) (provide)                       (Yes/No)
-```
-
-**Only 2 user inputs needed:**
-
-1. Document title
-2. Yes/No for AI notes
-
-Everything else runs automatically.
-
----
-
-## How It Works
-
-1. **Clone** this repo for each new project.
-2. Dump raw material into `inbox/` — no formatting, no order.
-3. Load `prompts/` files as context (these are commands, not data).
-4. Send any message to start the process.
-5. Provide title when asked.
-6. Answer Yes/No for annotations.
-7. Output is exported automatically as **both .md and .html**.
-
----
-
-## What Gets Fixed
-
-Each content type is represented with its **best UI representation**:
-
-✅ Every component rendered optimally for readability  
-✅ Proper formatting applied based on content type  
-✅ Visual structure that matches the intent  
-✅ Special characters and RTL text preserved
-
----
-
-## What _Never_ Changes
-
-❌ Your wording, voice, or intent  
-❌ Links, images, embedded files  
-❌ Meaning — even if phrased imperfectly
+A multi-phase system to turn **scattered raw input** into **structured, styled output**.
 
 ---
 
@@ -67,7 +10,69 @@ Each content type is represented with its **best UI representation**:
 
 ```
 DWTS/
-├── prompts/          # SYSTEM COMMANDS (not data!)
+├── prompts/          # Phase instructions (commands for AI)
 ├── inbox/            # RAW DATA goes here
 └── export/           # Output: .md + .html files
 ```
+
+---
+
+## ⚠️ Critical: Commands vs Data
+
+| Source     | Purpose                                           |
+| ---------- | ------------------------------------------------- |
+| `prompts/` | **PHASE COMMANDS** — instructions for AI behavior |
+| `inbox/`   | **RAW DATA** — the actual content to process      |
+
+---
+
+## Phase System
+
+Each phase is a **self-contained** instruction file in `prompts/`.
+
+### Phase 01: Raw Extraction (`00_PHASE_01.txt`)
+
+**What it does:**
+
+-   Reads ALL files from `inbox/`
+-   Represents each data type properly (lists, images, code, etc.)
+-   Reorders blocks logically
+-   Outputs to `export/` as `.md` and `.html`
+
+**What it NEVER does:**
+
+-   Fix typos, spelling, or grammar
+-   Add words that weren't in source
+-   Remove words that were in source
+
+**Example:**
+
+```
+INPUT:  "too the zou go"
+OUTPUT: "go too the zou"    ← Content preserved, just reordered
+```
+
+---
+
+## How It Works
+
+1. **Clone** this repo for each new project.
+2. Dump raw material into `inbox/` — no formatting, no order.
+3. Load the appropriate phase file from `prompts/` as context.
+4. AI processes raw data according to phase instructions.
+5. Output is exported to `export/` as **both .md and .html**.
+
+---
+
+## Phase 01 Details
+
+| Action                        | Allowed |
+| ----------------------------- | ------- |
+| Read from `inbox/`            | ✅ YES  |
+| Represent lists as lists      | ✅ YES  |
+| Represent code as code blocks | ✅ YES  |
+| Represent images as embeds    | ✅ YES  |
+| Reorder blocks logically      | ✅ YES  |
+| Fix typos                     | ❌ NO   |
+| Fix grammar                   | ❌ NO   |
+| Add explanations              | ❌ NO   |
