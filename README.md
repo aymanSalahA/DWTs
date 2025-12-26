@@ -6,13 +6,51 @@ A multi-phase system to turn **scattered raw input** into **structured, styled o
 
 ---
 
+## 🚀 How to Use
+
+### Step 1: Prepare Your Data
+
+Put all your raw files into the `inbox/` folder. Can be any format, any structure.
+
+### Step 2: Start New Session
+
+Open a new AI chat session (Claude, Gemini, GPT, etc.)
+
+### Step 3: Load Phase File
+
+Copy the content of `prompts/00_PHASE_01.txt` and paste it as your first message, OR attach the file as context.
+
+### Step 4: Trigger Execution
+
+Send a message like:
+
+```
+Apply Phase 01 to the inbox folder.
+```
+
+or simply:
+
+```
+Execute Phase 01.
+```
+
+### Step 5: Get Output
+
+The AI will process `inbox/` and create:
+
+-   `export/output.md`
+-   `export/output.html`
+
+---
+
 ## Folder Structure
 
 ```
-DWTS/
-├── prompts/          # Phase instructions (commands for AI)
-├── inbox/            # RAW DATA goes here
-└── export/           # Output: .md + .html files
+DWTs/
+├── prompts/
+│   └── 00_PHASE_01.txt    # Phase 1 instructions
+├── inbox/                  # YOUR RAW DATA goes here
+└── export/                 # Output files appear here
 ```
 
 ---
@@ -26,11 +64,7 @@ DWTS/
 
 ---
 
-## Phase System
-
-Each phase is a **self-contained** instruction file in `prompts/`.
-
-### Phase 01: Raw Extraction (`00_PHASE_01.txt`)
+## Phase 01: Raw Extraction
 
 **What it does:**
 
@@ -39,40 +73,44 @@ Each phase is a **self-contained** instruction file in `prompts/`.
 -   Reorders blocks logically
 -   Outputs to `export/` as `.md` and `.html`
 
-**What it NEVER does:**
+**What it STRICTLY NEVER does:**
 
--   Fix typos, spelling, or grammar
--   Add words that weren't in source
--   Remove words that were in source
+-   ❌ Fix typos ("projct" stays "projct")
+-   ❌ Fix spelling ("zou" stays "zou", NOT "zoo")
+-   ❌ Fix grammar
+-   ❌ Add words
+-   ❌ Remove words
+-   ❌ Add explanations or notes
 
-**Example:**
+**The Golden Rule:**
 
 ```
 INPUT:  "too the zou go"
 OUTPUT: "go too the zou"    ← Content preserved, just reordered
+WRONG:  "go to the zoo"     ← VIOLATION (spelling was fixed)
 ```
 
 ---
 
-## How It Works
+## Quick Start Commands
 
-1. **Clone** this repo for each new project.
-2. Dump raw material into `inbox/` — no formatting, no order.
-3. Load the appropriate phase file from `prompts/` as context.
-4. AI processes raw data according to phase instructions.
-5. Output is exported to `export/` as **both .md and .html**.
+After loading Phase 01 into a new session:
+
+| Command            | What it does                    |
+| ------------------ | ------------------------------- |
+| `Execute Phase 01` | Process inbox and create output |
+| `Apply Phase 01`   | Same as above                   |
+| `Run Phase 01`     | Same as above                   |
 
 ---
 
-## Phase 01 Details
+## Tips for Stubborn AI Models
 
-| Action                        | Allowed |
-| ----------------------------- | ------- |
-| Read from `inbox/`            | ✅ YES  |
-| Represent lists as lists      | ✅ YES  |
-| Represent code as code blocks | ✅ YES  |
-| Represent images as embeds    | ✅ YES  |
-| Reorder blocks logically      | ✅ YES  |
-| Fix typos                     | ❌ NO   |
-| Fix grammar                   | ❌ NO   |
-| Add explanations              | ❌ NO   |
+If a model keeps "fixing" things, try adding:
+
+```
+REMINDER: Do NOT fix ANY typos, spelling, or grammar.
+The word "projct" must stay as "projct".
+The word "zou" must stay as "zou".
+I know there are mistakes. Keep them.
+```

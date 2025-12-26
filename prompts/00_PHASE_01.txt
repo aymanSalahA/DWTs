@@ -1,79 +1,107 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                           PHASE 01: RAW EXTRACTION                           ║
-║         SELF-CONTAINED — PRESERVE CONTENT — REPRESENT PROPERLY               ║
+║                    ⚠️ STRICTLY FOLLOW THESE RULES ⚠️                         ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-# PHASE 01 — RAW DATA EXTRACTION & REPRESENTATION
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                               !
+!   STOP. READ THIS ENTIRE FILE BEFORE DOING ANYTHING.                         !
+!   DO NOT SKIP ANY SECTION.                                                   !
+!   VIOLATIONS WILL RESULT IN UNUSABLE OUTPUT.                                 !
+!                                                                               !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-This phase is **100% SELF-CONTAINED**. 
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 1: YOUR ONLY MISSION
+═══════════════════════════════════════════════════════════════════════════════
 
-## Mission
+You will do EXACTLY these steps. Nothing more. Nothing less.
 
-Take ALL raw data from `inbox/` → Represent each data type properly → Reorder blocks → Output as Markdown + HTML
+1. READ all files from `inbox/` folder (including subfolders)
+2. IDENTIFY what type each piece of data is (list, code, image, link, text)
+3. REPRESENT each data type in proper format (see Section 3)
+4. REORDER blocks logically (group similar content)
+5. OUTPUT to `export/output.md` and `export/output.html`
 
----
+THAT IS ALL. DO NOT DO ANYTHING ELSE.
 
-## ⛔ CONTENT RULES — ZERO EXCEPTIONS
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 2: ABSOLUTE PROHIBITIONS — READ THREE TIMES
+═══════════════════════════════════════════════════════════════════════════════
 
-### WHAT YOU DO:
-✅ Read all files from `inbox/` folder (recursively)
-✅ Collect every character, word, phrase, block exactly as written
-✅ Represent each content type in its proper format (see below)
-✅ Reorder blocks into a logical sequence (group related content)
-✅ Output to `export/` as `.md` and `.html` files
+🚫🚫🚫 YOU ARE FORBIDDEN FROM DOING THE FOLLOWING 🚫🚫🚫
 
-### WHAT YOU NEVER DO:
-❌ Fix typos — "projct" stays "projct"
-❌ Fix grammar — "too the zou" stays "too the zou"
-❌ Fix spelling — "zoo" typed as "zou" stays "zou"
-❌ Add explanations, notes, or comments
-❌ Interpret or translate content
-❌ Add words that weren't in raw data
-❌ Remove words that were in raw data
+❌ DO NOT fix typos
+   WRONG: "projct" → "project"
+   RIGHT: "projct" → "projct"
 
----
+❌ DO NOT fix spelling
+   WRONG: "zou" → "zoo"
+   RIGHT: "zou" → "zou"
 
-## 🔴 THE GOLDEN RULE
+❌ DO NOT fix grammar
+   WRONG: "me go store" → "I go to the store"
+   RIGHT: "me go store" → "me go store"
 
-    INPUT: "too the zou go"
-    OUTPUT: "go too the zou"
+❌ DO NOT add words
+   WRONG: "install npm" → "First, install npm"
+   RIGHT: "install npm" → "install npm"
 
-    ✅ CORRECT — Reordered, content preserved exactly
-    ❌ WRONG — "go to the zoo" (fixed spelling = VIOLATION)
+❌ DO NOT remove words
+   WRONG: "please install npm now" → "install npm"
+   RIGHT: "please install npm now" → "please install npm now"
 
-**If it wasn't in the raw data, it cannot be in the output.**
-**If it had a typo in raw data, it has that typo in output.**
+❌ DO NOT add punctuation
+   WRONG: "hello world" → "Hello world."
+   RIGHT: "hello world" → "hello world"
 
----
+❌ DO NOT capitalize
+   WRONG: "react" → "React"
+   RIGHT: "react" → "react"
 
-## 📊 DATA TYPE REPRESENTATION
+❌ DO NOT add explanations or notes
+   WRONG: Adding "💡 Note: this command does X"
+   RIGHT: No notes. Ever.
 
-Represent each content type in its proper format — but **content stays exactly as written**:
+❌ DO NOT interpret or translate
+   WRONG: Changing Arabic/Hebrew/other text
+   RIGHT: Keep exactly as-is
 
-| Data Type | Representation | Example |
-|-----------|----------------|---------|
-| **List items** | As markdown list (`-` or `1.`) | `- item one` |
-| **Images** | As image embed | `![alt](path)` or `<img>` |
-| **Links** | As markdown links | `[text](url)` |
-| **Code/Commands** | As code blocks | ` ```bash ` |
-| **Tables** | As markdown tables | `| col | col |` |
-| **Quotes** | As blockquotes | `> quote text` |
-| **Plain text** | As paragraphs | Normal text |
+❌ DO NOT change word order within a sentence
+   WRONG: "npm install first" → "first install npm"
+   RIGHT: "npm install first" → "npm install first"
 
-### Key Point:
-The **content** inside stays EXACTLY as raw data.
-Only the **representation** changes to proper format.
+═══════════════════════════════════════════════════════════════════════════════
+⚠️ REPEAT: IF YOU DO ANY OF THE ABOVE, YOU HAVE FAILED ⚠️
+═══════════════════════════════════════════════════════════════════════════════
 
-### Example:
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 3: DATA TYPE REPRESENTATION
+═══════════════════════════════════════════════════════════════════════════════
 
-**RAW INPUT:**
+You MUST represent data in its proper format.
+The CONTENT stays exactly the same. Only the FORMAT changes.
+
+| If you see...          | Represent as...              |
+|------------------------|------------------------------|
+| Multiple related items | Markdown list (- item)       |
+| Commands/code          | Code block (```bash)         |
+| Image reference        | Image embed (![](path))      |
+| URL/link               | Markdown link ([text](url))  |
+| Table data             | Markdown table               |
+| Quote                  | Blockquote (> text)          |
+| Regular text           | Paragraph                    |
+
+### CRITICAL EXAMPLE:
+
+RAW INPUT:
 ```
 buy milk
-buy bread  
+buy bread
 npm instal pakage
 ```
 
-**VALID OUTPUT:**
+✅ CORRECT OUTPUT:
 ```markdown
 - buy milk
 - buy bread
@@ -83,95 +111,143 @@ npm instal pakage
 ```
 ```
 
-Note: "instal" and "pakage" stay misspelled. But:
-- List items become a proper list
-- Command becomes a code block
+⚠️ NOTICE: "instal" and "pakage" are STILL MISSPELLED.
+⚠️ We only changed the FORMAT, not the CONTENT.
 
----
+❌ WRONG OUTPUT (DO NOT DO THIS):
+```markdown
+- buy milk
+- buy bread
 
-## How Reordering Works
+```bash
+npm install package
+```
+```
+↑↑↑ THIS IS WRONG BECAUSE "instal" WAS CHANGED TO "install" ↑↑↑
 
-You MAY reorder blocks in this manner:
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 4: THE GOLDEN RULE — MEMORIZE THIS
+═══════════════════════════════════════════════════════════════════════════════
 
-| Action | Allowed |
-|--------|---------|
-| Move entire blocks/fragments | ✅ YES |
-| Group similar content together | ✅ YES |
-| Sequence fragments logically | ✅ YES |
-| Change word order within a sentence | ❌ NO |
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║   INPUT:  "too the zou go"                                                ║
+║   OUTPUT: "go too the zou"                                                ║
+║                                                                           ║
+║   ✅ CORRECT — Blocks reordered, content IDENTICAL                        ║
+║                                                                           ║
+║   ❌ WRONG — "go to the zoo" (YOU CHANGED THE CONTENT!)                   ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
 
----
+Ask yourself before outputting:
+- Did I change ANY word? → YOU FAILED
+- Did I add ANY word? → YOU FAILED  
+- Did I remove ANY word? → YOU FAILED
+- Did I fix ANY spelling? → YOU FAILED
+- Did I fix ANY grammar? → YOU FAILED
 
-## Output Requirements
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 5: WHAT "REORDER" MEANS
+═══════════════════════════════════════════════════════════════════════════════
 
-1. **Markdown file** (`export/output.md`)
-   - Contains all raw data, properly represented
-   - Lists as lists, code as code blocks, images as embeds
-   - Content preserved exactly (typos and all)
+REORDER means moving WHOLE BLOCKS around. NOT changing words.
 
-2. **HTML file** (`export/output.html`)
-   - Same content rendered as HTML
-   - Proper HTML elements for each data type
-   - Bootstrap 5 styling for clean appearance
+✅ ALLOWED:
+- Move a paragraph from bottom to top
+- Group all commands together
+- Group all list items together
+- Put related content near each other
 
----
+❌ NOT ALLOWED:
+- Change "install npm first" to "first install npm"
+- Merge two sentences into one
+- Split one sentence into two
 
-## Execution Flow
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 6: OUTPUT FORMAT
+═══════════════════════════════════════════════════════════════════════════════
+
+Create TWO files in `export/` folder:
+
+1. `output.md` — Markdown format
+2. `output.html` — HTML format with Bootstrap 5
+
+Both files must contain IDENTICAL content (same words, same typos).
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 7: EXECUTION FLOW
+═══════════════════════════════════════════════════════════════════════════════
 
 ```
 START
-  ├─→ Read ALL files in inbox/ (including subdirectories)
-  ├─→ Identify data types (list, code, image, text, etc.)
-  ├─→ Represent each in proper format (content unchanged)
-  ├─→ Determine logical order (by topic/relatedness)
-  ├─→ Arrange blocks in that order
-  ├─→ Write to export/output.md
-  ├─→ Write to export/output.html
+│
+├─→ Read ALL files in inbox/ (recursively)
+│
+├─→ For EACH piece of content:
+│   ├─→ Identify type (list? code? image? text?)
+│   └─→ Keep content EXACTLY as-is
+│
+├─→ Group similar content together
+│
+├─→ Write to export/output.md
+├─→ Write to export/output.html
+│
 END
 ```
 
----
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 8: SELF-CHECK BEFORE OUTPUT
+═══════════════════════════════════════════════════════════════════════════════
 
-## Verification Checklist (Before Output)
+Before you output, check ALL of these:
 
-Before producing output, verify:
+□ Every word in my output exists in the input (exact match, including typos)
+□ I did NOT add any words
+□ I did NOT remove any words
+□ I did NOT fix any spelling
+□ I did NOT fix any grammar
+□ I did NOT add punctuation
+□ I did NOT capitalize anything
+□ Lists are rendered as proper lists
+□ Code is in code blocks
+□ Images are properly embedded
 
-- [ ] Every word in output exists in input (exact match)
-- [ ] No words added that weren't in input
-- [ ] No spelling corrections made
-- [ ] No grammar corrections made
-- [ ] Lists are rendered as proper lists
-- [ ] Code/commands are in code blocks
-- [ ] Images are properly embedded
-- [ ] Links are properly formatted
+If ANY checkbox fails, START OVER.
 
----
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 9: COMPLETION MESSAGE
+═══════════════════════════════════════════════════════════════════════════════
 
-## Phase Status
+When done, show ONLY this:
 
-📍 **PHASE 01: RAW EXTRACTION**
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Status: Ready to extract
-
-When complete, output:
 ```
 📍 PHASE 01: COMPLETE
-✅ Extracted [N] items from [M] files
+━━━━━━━━━━━━━━━━━━━━━━
+✅ Extracted from [N] files
 ✅ Represented as proper data types
-✅ Reordered into logical blocks
+✅ Content preserved EXACTLY (no fixes)
 ✅ Written to export/output.md
 ✅ Written to export/output.html
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Raw extraction complete. Content preserved exactly.
+━━━━━━━━━━━━━━━━━━━━━━
 ```
 
----
+═══════════════════════════════════════════════════════════════════════════════
+⚠️ FINAL WARNING ⚠️
+═══════════════════════════════════════════════════════════════════════════════
 
-## This Phase Does NOT:
+If you "fix" or "improve" ANYTHING:
+- A typo
+- A grammar mistake
+- A spelling error
+- Missing punctuation
 
-- Fix typos, spelling, or grammar
-- Add explanatory notes
-- Add words that weren't in source
-- Ask for user input
+YOU HAVE VIOLATED THIS PHASE.
 
-**It is EXTRACT + REPRESENT + REORDER. Content stays exactly as written.**
+The human KNOWS there are mistakes. That is intentional.
+Your job is NOT to fix them.
+Your job is to PRESERVE them EXACTLY.
+
+═══════════════════════════════════════════════════════════════════════════════
+END OF PHASE 01 INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════
