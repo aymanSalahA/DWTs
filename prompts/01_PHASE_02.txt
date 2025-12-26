@@ -1,0 +1,153 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    PHASE 02: ENHANCEMENT & ORGANIZATION                      ║
+║                    ⚠️ TRANSFORM, CORRECT, AND STRUCTURE ⚠️                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                               !
+!   STOP. READ THIS ENTIRE FILE BEFORE DOING ANYTHING.                          !
+!   NOTE: THIS PHASE MODIFIES CONTENT. PHASE 1 RULES OF "NO FIXES" ARE OVER.    !
+!                                                                               !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 1: YOUR MISSION
+═══════════════════════════════════════════════════════════════════════════════
+
+INPUT: Read content from `export/phase_01.md` (The "Raw" output).
+ACTION: Transform, Correct, Reorganize, and Enhance.
+OUTPUT: Create `export/phase_02.html` and `export/phase_02.md`.
+CONSTRAINT: DO NOT modify Phase 1 files. Review them, but write only to Phase 2.
+
+Key Goals:
+1.  **Better Representation**: Turn raw cards into rich UI (lists, code blocks, carousels, tooltips).
+2.  **Correction**: Fix typos, formatting issues, and grammar (e.g., "$install", "instl").
+3.  **Navigation**: Create a documentation-style sidebar with anchor links.
+4.  **Diff View**: Provide a way to compare "Raw" vs "Enhanced" content for each block.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 2: CORRECTION & CLEANUP
+═══════════════════════════════════════════════════════════════════════════════
+
+Unlike Phase 1, you MUST fix issues now, BUT you must NOT delete data.
+
+✅ FIX specific formatting patterns:
+   - "$install" → "$ install" (space after dollar sign)
+   - "instl" → "install"
+   - Fix obviously broken command syntax.
+
+✅ FIX general text:
+   - Correct typos.
+   - Fix grammar.
+   - Improve readability.
+
+⚠️ CRITICAL PRESERVATION RULE:
+   - **NO SUMMARIZATION**. Do not summarize a list of 10 items into 3 "key points".
+   - **NO DATA LOSS**. If a link or note is "floating" or "scattered", you must MOVE it to a relevant home, NOT delete it.
+   - Example: If you see `[https://example.com]` floating between paragraphs, find a logical place for it (e.g., "Resources" section) or keep it as a "Misc Note".
+   - **Verification**: Every single link/URL from Phase 1 MUST exist in Phase 2.
+
+❌ DO NOT change the MEANING of the content.
+❌ DO NOT delete "messy" data just to make it look clean. Polish the mess, don't hide it.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 3: ENHANCED REPRESENTATION
+═══════════════════════════════════════════════════════════════════════════════
+
+The data is currently in "raw cards". You must upgrade them.
+
+1. **Rich Components**:
+   - Don't just dump text. Use Badges, Alerts, Tables, and Cards.
+   - If a block contains multiple steps, consider a Steps/Timeline component.
+   - If a block has multiple related images or items, use a **Carousel**.
+   - Use **Tooltips** for clarifying abbreviations or technical terms.
+
+2. **Code Blocks**:
+   - Ensure syntax highlighting is active.
+   - Add "Copy" buttons to code blocks in HTML.
+
+3. **Lists**:
+   - Style lists cleanly.
+   - Use checkmarks or icons where appropriate.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 4: NAVIGATION & STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+Treat the output like a high-quality Documentation Website or Book.
+
+1. **Sidebar Navigation**:
+   - Create a fixed/sticky sidebar on the left.
+   - List all Sections/Cards as clickable links.
+   - Group links logically (e.g., "Setup", "Concepts", "Troubleshooting").
+
+2. **Anchor Links**:
+   - Every card/block MUST have a unique ID.
+   - Sidebar links must jump smoothly to the corresponding card.
+
+3. **Layout**:
+   - Two-column layout: Sidebar (Navigation) + Main Content (Cards).
+   - Responsive: Sidebar becomes a hamburger menu on mobile.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 5: THE "DIFF" FEATURE
+═══════════════════════════════════════════════════════════════════════════════
+
+For EACH card/block, you must generate a "Diff" or "Comparison" view.
+The user wants to see what changed from Phase 1.
+
+Implementation in HTML:
+- The Main View shows the **Enhanced/Corrected** version.
+- Add a "Show Raw/Diff" toggle or tab on every card.
+- When toggled, show the **Original Raw Text** (from Phase 1) for that specific block.
+- Optional: Highlight changes (red textual strikes for removed, green for added) if you can generate a diff view, otherwise just showing "Raw" vs "Polished" tabs is sufficient.
+
+Implementation in Markdown:
+- It effectively just contains the **Enhanced** version. The Diff is primarily a UI feature for the HTML output.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 6: HTML STYLING (THEME)
+═══════════════════════════════════════════════════════════════════════════════
+
+- **Framework**: Use Bootstrap 5 or Tailwind (whichever you prefer/are loaded with, but Bootstrap is often easier for single-file output).
+- **Theme**: Professional, clean, "Documentation" look.
+- **Sidebar**: Dark or distinct background.
+- **Content Area**: Clean white/gray.
+- **Visuals**: Use shadows, rounded corners, transitions.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 7: EXECUTION FLOW
+═══════════════════════════════════════════════════════════════════════════════
+
+1. READ `export/phase_01.md`.
+2. PARSE the blocks/cards identified in Phase 1.
+3. FOR EACH BLOCK:
+   b. **Correct** the text (typos, grammar, "$ install").
+   c. **Enhance** the formatting (rich HTML components).
+   d. **Preserve** the original text for the Diff view.
+4. GENERATE `export/phase_02.html`:
+   - Include Sidebar.
+   - Render Enhanced Cards.
+   - Embed "Diff" toggle for each card (Original vs Enhanced).
+5. GENERATE `export/phase_02.md`:
+   - Contains ONLY the corrected/enhanced text (clean version).
+6. VERIFY: Do NOT modify original files in `inbox/` or `export/phase_01.*`.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 8: COMPLETION MESSAGE
+═══════════════════════════════════════════════════════════════════════════════
+
+When done, show:
+
+```
+📍 PHASE 02: COMPLETE
+━━━━━━━━━━━━━━━━━━━━━━
+✅ Input: Read from export/phase_01.md
+✅ Corrections Applied ($ install, spelling, etc.)
+✅ Navigation: Sidebar & Anchors added
+✅ Visualization: Enhanced with rich components (Carousels, Tooltips)
+✅ Diff View: "Raw vs Enhanced" toggle implemented
+✅ Written to export/phase_02.md (Clean content)
+✅ Written to export/phase_02.html (Full interactive app)
+━━━━━━━━━━━━━━━━━━━━━━
+```

@@ -1,0 +1,6 @@
+Organize my Flutter notes (text, code, images, todos) into a structured document. Follow these rules:
+1. Preserve my original content exactly as written.
+2. Categorize under headings: "Page Layout," "Navigation," "Stateful vs Stateless," "Questions/TODOs."
+3. Highlight AI notes/suggestions in yellow (e.g., "🟡 AI Note: [clarification]").
+4. For code, use syntax highlighting.
+5. Output: Generate both **Markdown**. only one markown that I can copy , the markdown include everything in one shot

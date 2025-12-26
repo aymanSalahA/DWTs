@@ -1,0 +1,48 @@
+0 — Submit raw data
+1 — Order data (no text edits)
+2 — Group and label (minor header edits only)
+3 — Flag gaps, redundancies, unclear sections
+4 — Resolve all flagged issues (user action required)
+5 — Approve final outline
+
+
+
+No step proceeds until current step is explicitly approved
+Only Step 2 allows minor edits (headers/titles only)
+Raw content untouched in Steps 0, 1, 3, 4, 5
+
+
+🔒 No step proceeds until the current one is fully done and approved.
+✍️ Only Step 2 allows edits — and only to headers/titles (e.g., shorten, clarify). All body text stays 100% original everywhere else.
+🚩 Step 4 flags must be resolved by you — no auto-fixing by me. If something’s missing or unclear, I’ll stop and wait for your input.
+⏸️ Pause anytime. Resume later — your progress is saved at the last completed step.
+
+
+Ok,  What if after generating final data , user added new piece of Raw info, should we restart ? what if user wrote raw info in middle of process 
+
+---------------------
+0- user raw data (notes, bullet points, drafts, references, etc.).
+1-order data /Suggest a logical flow (e.g., introduction → background → key points → conclusion), all letters/characters are untouched at all 
+2-Categorize and group related ideas./ add labels and titles and headers (minor edits in titles and category)
+3- Flag gaps, redundancies, or unclear sections for your review.
+4- Present the ordered outline ( final draft) for approval .
+
+
+NOTE : USER CANT PROCEDD to next metro step unless finish the PREV step-------------
+--------------------------
+(e.g., formatting for PDF, visual hierarchy, bilingual alignment, etc.).
+https://www.markdowntopdf.com/
+Metro Steps > 
+------------------------------
+I will give you scattered peices of Information , that need to be organized and then you you give me the final Output ,, 
+
+Step one is that you get information and order them in best order 
+
+after that I will walk you till we get final pdf file ( I will tell you each step what is required in this phase)
+
+important note, keep my raw data till I ask you to add or remove something
+
+https://chat.qwen.ai/c/536591b0-27ae-46cf-b078-503149711053
+
+
+

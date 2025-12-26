@@ -1,0 +1,13 @@
+Collect → Organize → Fix → Export.( If I give wrong order it should be aware)
+
+-------------------------------
+after making the agents , and still have to try other models , but here is the Notes :
+1- the shape of the output is only text in readme , no checklists even if it is better to represent it the todo list shape 
+2- Well , since we talk about shapes , what about flow charts and other represetations too ? 
+3- I want those Phases "Collect → Organize → Fix → Export." Not escpaed , It is sequenctial one by one , no skipp unless unders some rules "fixing by AI for example " ,, Also for each phase AI reply with ONLY one word , so if in Collect , it always hint that it is in collected mode or if receive data it says "Reveived" Not bla bla at all 
+4- Before anything, there is a need to know the title of the document , not AI making it up 
+5- Anootation , or markup and making something bold or italic , or second langage in doc like Arabic too 
+6- Also if I want to make big file "that is like a book" will it be possible , or collect them later ?
+7-images , media and attachments 
+8-Code snippets , need them in pretty image like the ones in HydePHP
+9-also need to remove duplicates later ?? Or keep it  ?

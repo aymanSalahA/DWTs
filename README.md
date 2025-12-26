@@ -64,6 +64,21 @@ DWTs/
 
 ---
 
+## Phase 02: Enhance & Structure
+
+| #   | Action        | Details                                                 |
+| --- | ------------- | ------------------------------------------------------- |
+| 1   | **Read**      | Input from `export/phase_01.md`                         |
+| 2   | **Correct**   | Fix typos ($ install), grammar, and formatting          |
+| 3   | **Enhance**   | Convert raw text to Rich Components (Carousels, Tabs)   |
+| 4   | **Structure** | Sidebar navigation + Anchors for every section          |
+| 5   | **Diff View** | Interactive toggle: [Raw Phase 1] vs [Enhanced Phase 2] |
+| 6   | **Output**    | `phase_02.md` (Clean) + `phase_02.html` (Interactive)   |
+
+> **Critical Rule**: NO DATA LOSS. Phase 2 organizes and corrects, but it must NEVER delete user links, notes, or "scattered" thoughts. All data points must find a home in the new structure.
+
+---
+
 ## Phase 01: What It NEVER Does
 
 -   ❌ Fix typos ("projct" stays "projct")
