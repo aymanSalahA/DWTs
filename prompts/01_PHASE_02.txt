@@ -3,12 +3,12 @@
 ║                    ⚠️ TRANSFORM, CORRECT, AND STRUCTURE ⚠️                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !                                                                               !
 !   STOP. READ THIS ENTIRE FILE BEFORE DOING ANYTHING.                          !
 !   NOTE: THIS PHASE MODIFIES CONTENT. PHASE 1 RULES OF "NO FIXES" ARE OVER.    !
 !                                                                               !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 1: YOUR MISSION
@@ -20,16 +20,17 @@ OUTPUT: Create `export/phase_02.html` and `export/phase_02.md`.
 CONSTRAINT: DO NOT modify Phase 1 files. Review them, but write only to Phase 2.
 
 Key Goals:
-1.  **Better Representation**: Turn raw cards into rich UI (lists, code blocks, carousels, tooltips).
-2.  **Correction**: Fix typos, formatting issues, and grammar (e.g., "$install", "instl").
-3.  **Navigation**: Create a documentation-style sidebar with anchor links.
-4.  **Diff View**: Provide a way to compare "Raw" vs "Enhanced" content for each block.
+1.  **Better Representation**: Use optimal UI components for each content type.
+2.  **Correction**: Fix typos, formatting issues, and grammar.
+3.  **Navigation**: Sidebar with anchor links (and sub-anchors where needed).
+4.  **Change Tracking**: Show what AI changed, refined, or removed.
+5.  **Raw View**: Toggle to see original Phase 1 content.
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 2: CORRECTION & CLEANUP
 ═══════════════════════════════════════════════════════════════════════════════
 
-Unlike Phase 1, you MUST fix issues now, BUT you must NOT delete data.
+Unlike Phase 1, you MUST fix issues now, BUT you must NOT delete data silently.
 
 ✅ FIX specific formatting patterns:
    - "$install" → "$ install" (space after dollar sign)
@@ -43,38 +44,140 @@ Unlike Phase 1, you MUST fix issues now, BUT you must NOT delete data.
 
 ⚠️ CRITICAL PRESERVATION RULE:
    - **NO SUMMARIZATION**. Do not summarize a list of 10 items into 3 "key points".
-   - **NO DATA LOSS**. If a link or note is "floating" or "scattered", you must MOVE it to a relevant home, NOT delete it.
-   - Example: If you see `[https://example.com]` floating between paragraphs, find a logical place for it (e.g., "Resources" section) or keep it as a "Misc Note".
+   - **NO DATA LOSS**. If a link or note is "floating" or "scattered", MOVE it to a relevant section, NOT delete it.
    - **Verification**: Every single link/URL from Phase 1 MUST exist in Phase 2.
 
 ❌ DO NOT change the MEANING of the content.
 ❌ DO NOT delete "messy" data just to make it look clean. Polish the mess, don't hide it.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 3: ENHANCED REPRESENTATION
+SECTION 3: CHANGE TRACKING — SHOW WHAT AI DID
 ═══════════════════════════════════════════════════════════════════════════════
 
-The data is currently in "raw cards". You must upgrade them.
+For EACH card/block, you must visually indicate what the AI changed.
 
-1. **Rich Components**:
-   - Don't just dump text. Use Badges, Alerts, Tables, and Cards.
-   - If a block contains multiple steps, consider a Steps/Timeline component.
-   - If a block has multiple related images or items, use a **Carousel**.
-   - Use **Tooltips** for clarifying abbreviations or technical terms.
+### Three Types of Changes to Track:
 
-2. **Code Blocks**:
-   - Ensure syntax highlighting is active.
-   - Add "Copy" buttons to code blocks in HTML.
+1. **AI REFINED** — Content was improved/corrected
+   - Show with a ✨ icon or green highlight
+   - Example: "install" (was "instl")
+   - User can see the fix was made
 
-3. **Lists**:
-   - Style lists cleanly.
-   - Use checkmarks or icons where appropriate.
+2. **AI CREATED** — Content that AI added (headers, explanations, structure)
+   - Show with a 🤖 icon or yellow highlight
+   - Small badge: "[AI Added]" or "🤖"
+
+3. **AI OMITTED/CONDENSED** — Content that was removed or shortened
+   - Show with ~~strikethrough~~ or a special indicator
+   - Never fully delete — show what was removed
+   - Example: "install the package" (original: "~~install install~~ the package")
+   - Or show a collapsed section: "📎 See removed content"
+
+### Visual Implementation (HTML):
+```html
+<!-- Refined content -->
+<span class="ai-refined" title="Original: instl">install</span>
+
+<!-- Created by AI -->
+<span class="ai-created">🤖 This section was organized by AI</span>
+
+<!-- Omitted content -->
+<span class="ai-omitted"><del>redundant duplicate text</del></span>
+<!-- OR -->
+<details class="ai-omitted-details">
+  <summary>📎 Removed: redundant phrase</summary>
+  <p>install install the package</p>
+</details>
+```
+
+### Example CSS:
+```css
+.ai-refined {
+    background-color: #d4edda; /* Light green */
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: help;
+}
+
+.ai-created {
+    background-color: #fff3cd; /* Yellow */
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.ai-omitted {
+    color: #6c757d;
+    text-decoration: line-through;
+}
+
+.ai-omitted-details {
+    background-color: #f8f9fa;
+    border-left: 3px solid #ffc107;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+}
+```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 4: NAVIGATION & STRUCTURE
+SECTION 4: UI REPRESENTATION — USE THE RIGHT COMPONENT
 ═══════════════════════════════════════════════════════════════════════════════
 
-Treat the output like a high-quality Documentation Website or Book.
+Do NOT use one-size-fits-all approach. Choose the OPTIMAL UI for each content type.
+
+### Available Block Types (Use What Fits Best):
+- Text / Paragraph
+- Heading 1, 2, 3
+- Card / Panel
+- Section
+- Highlight / Callout
+- Number list / Bullet list
+- Todo list / Checklist
+- Toggle list (collapsible)
+- Code block (with syntax highlighting + copy button)
+- Quote / Blockquote
+- Table
+- Image / Gallery
+- Toggle heading (collapsible sections)
+- Status Badge
+- Callout / Admonition (info, warning, error, success)
+- Tabs (for related but separate content)
+- Accordion
+- Timeline / Steps
+- Tooltip (for abbreviations)
+- Anchor Link
+- File Tree (for directory structures)
+- Mermaid Diagram (for flowcharts)
+- KBD Shortcut (for keyboard shortcuts)
+- API Endpoint (for API docs)
+
+### Guidelines:
+| Content Type              | Recommended UI                    |
+|---------------------------|-----------------------------------|
+| Sequential steps          | Timeline / Ordered Steps          |
+| Multiple options/views    | Tabs                              |
+| FAQ / Questions           | Accordion                         |
+| Commands                  | Code block + Copy button          |
+| Related links             | Badge list / Card grid            |
+| Warnings/Notes            | Callout / Admonition              |
+| Pros & Cons               | Two-column table or cards         |
+| Process flow              | Mermaid diagram / Flowchart       |
+| Nested info               | Toggle list / Collapsible         |
+| Key terms                 | Tooltip on hover                  |
+| Directory structure       | File Tree                         |
+| Single important value    | Status Badge                      |
+
+### Balance the Design:
+- NOT too ugly (plain text dumps)
+- NOT overdesigned (too many colors, animations, noise)
+- CLEAN, professional, documentation-style look
+- Cards should be readable at a glance
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 5: NAVIGATION & STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+Treat the output like a high-quality Documentation Website.
 
 1. **Sidebar Navigation**:
    - Create a fixed/sticky sidebar on the left.
@@ -85,56 +188,122 @@ Treat the output like a high-quality Documentation Website or Book.
    - Every card/block MUST have a unique ID.
    - Sidebar links must jump smoothly to the corresponding card.
 
-3. **Layout**:
+3. **Sub-Anchors** (When Needed):
+   - If a section has multiple parts, add sub-anchors.
+   - Example:
+     ```
+     📈 Process Steps
+        ├── Step 0: Submit
+        ├── Step 1: Order
+        └── Step 2: Group
+     ```
+
+4. **Layout**:
    - Two-column layout: Sidebar (Navigation) + Main Content (Cards).
    - Responsive: Sidebar becomes a hamburger menu on mobile.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 5: THE "DIFF" FEATURE
+SECTION 6: THE "DIFF" FEATURE — RAW VS ENHANCED
 ═══════════════════════════════════════════════════════════════════════════════
 
 For EACH card/block, you must generate a "Diff" or "Comparison" view.
 The user wants to see what changed from Phase 1.
 
-Implementation in HTML:
-- The Main View shows the **Enhanced/Corrected** version.
-- Add a "Show Raw/Diff" toggle or tab on every card.
-- When toggled, show the **Original Raw Text** (from Phase 1) for that specific block.
-- Optional: Highlight changes (red textual strikes for removed, green for added) if you can generate a diff view, otherwise just showing "Raw" vs "Polished" tabs is sufficient.
+### Implementation:
+1. **Default View**: Shows the Enhanced/Corrected version with change indicators.
 
-Implementation in Markdown:
-- It effectively just contains the **Enhanced** version. The Diff is primarily a UI feature for the HTML output.
+2. **"Show Raw" Toggle**:
+   - Button on every card: "Show Raw" / "Show Enhanced"
+   - When toggled, shows the Original Raw Text from Phase 1
+
+3. **Change Indicators in Enhanced View** (from Section 3):
+   - ✨ Green for refined text
+   - 🤖 Yellow for AI-added content
+   - ~~Strikethrough~~ for removed/condensed content
+
+### Example Card Structure:
+```html
+<div class="doc-card" id="section-example">
+    <div class="doc-card-header">
+        <h5>🛠 Example Section</h5>
+        <button onclick="toggleView('example')">Show Raw</button>
+    </div>
+    <div class="doc-card-body">
+        <!-- Enhanced View (default) -->
+        <div id="enhanced-example" class="enhanced-view">
+            <p>This is the <span class="ai-refined" title="was: corected">corrected</span> text.</p>
+            <p class="ai-created">🤖 AI organized this into a clear structure.</p>
+        </div>
+
+        <!-- Raw View (hidden by default) -->
+        <div id="raw-example" class="raw-view" style="display:none;">
+            This is the corected text.
+        </div>
+    </div>
+</div>
+```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 6: HTML STYLING (THEME)
+SECTION 7: HTML STYLING (THEME)
 ═══════════════════════════════════════════════════════════════════════════════
 
-- **Framework**: Use Bootstrap 5 or Tailwind (whichever you prefer/are loaded with, but Bootstrap is often easier for single-file output).
+- **Framework**: Use Bootstrap 5 (easier for single-file output).
 - **Theme**: Professional, clean, "Documentation" look.
 - **Sidebar**: Dark or distinct background.
 - **Content Area**: Clean white/gray.
-- **Visuals**: Use shadows, rounded corners, transitions.
+- **Visuals**: Use shadows, rounded corners, smooth transitions.
+
+### Color Scheme for Change Tracking:
+- Yellow (#fff3cd): AI-created/added content
+- Green (#d4edda): AI-refined/corrected content
+- Gray strikethrough (#6c757d): AI-omitted/removed content
+- Red badge (#dc3545): Important warnings
+
+### Card Balance:
+- Consistent padding and spacing
+- Not cluttered with too many badges
+- Easy to scan visually
+- Code blocks should have copy buttons
+- Links should be clearly clickable
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 7: EXECUTION FLOW
+SECTION 8: EXECUTION FLOW
 ═══════════════════════════════════════════════════════════════════════════════
 
 1. READ `export/phase_01.md`.
 2. PARSE the blocks/cards identified in Phase 1.
 3. FOR EACH BLOCK:
-   b. **Correct** the text (typos, grammar, "$ install").
-   c. **Enhance** the formatting (rich HTML components).
-   d. **Preserve** the original text for the Diff view.
+   a. **Preserve** the original text for the Raw view.
+   b. **Correct** the text (typos, grammar).
+   c. **Track** what you changed (refined, created, omitted).
+   d. **Enhance** the formatting (choose optimal UI component).
 4. GENERATE `export/phase_02.html`:
-   - Include Sidebar.
-   - Render Enhanced Cards.
-   - Embed "Diff" toggle for each card (Original vs Enhanced).
+   - Include Sidebar with anchors (and sub-anchors if needed).
+   - Render Enhanced Cards with change indicators.
+   - Embed "Raw vs Enhanced" toggle for each card.
 5. GENERATE `export/phase_02.md`:
    - Contains ONLY the corrected/enhanced text (clean version).
 6. VERIFY: Do NOT modify original files in `inbox/` or `export/phase_01.*`.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 8: COMPLETION MESSAGE
+SECTION 9: SELF-CHECK BEFORE OUTPUT
+═══════════════════════════════════════════════════════════════════════════════
+
+Before you output, check ALL of these:
+
+□ All links/URLs from Phase 1 exist in Phase 2
+□ No content was silently deleted
+□ AI changes are visually indicated (refined ✨, created 🤖, omitted ~~)
+□ Each card has a "Show Raw" toggle
+□ Navigation sidebar has anchors to all sections
+□ UI components are appropriate for the content type
+□ Cards are balanced (not too plain, not over-designed)
+□ Code blocks have syntax highlighting and copy buttons
+
+If ANY checkbox fails, FIX IT before outputting.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 10: COMPLETION MESSAGE
 ═══════════════════════════════════════════════════════════════════════════════
 
 When done, show:
@@ -143,11 +312,16 @@ When done, show:
 📍 PHASE 02: COMPLETE
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ Input: Read from export/phase_01.md
-✅ Corrections Applied ($ install, spelling, etc.)
-✅ Navigation: Sidebar & Anchors added
-✅ Visualization: Enhanced with rich components (Carousels, Tooltips)
-✅ Diff View: "Raw vs Enhanced" toggle implemented
+✅ Corrections: Applied (typos, grammar, formatting)
+✅ Change Tracking: ✨ Refined | 🤖 Created | ~~Omitted~~
+✅ Navigation: Sidebar with anchors + sub-anchors
+✅ UI Components: Optimal representation for each content type
+✅ Raw Toggle: "Show Raw" available on every card
 ✅ Written to export/phase_02.md (Clean content)
-✅ Written to export/phase_02.html (Full interactive app)
+✅ Written to export/phase_02.html (Full interactive documentation)
 ━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+═══════════════════════════════════════════════════════════════════════════════
+END OF PHASE 02 INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════

@@ -3,13 +3,13 @@
 ║                    ⚠️ STRICTLY FOLLOW THESE RULES ⚠️                         ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !                                                                               !
 !   STOP. READ THIS ENTIRE FILE BEFORE DOING ANYTHING.                         !
 !   DO NOT SKIP ANY SECTION.                                                   !
 !   VIOLATIONS WILL RESULT IN UNUSABLE OUTPUT.                                 !
 !                                                                               !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 1: YOUR ONLY MISSION
@@ -37,7 +37,7 @@ If user copies ANY text from original raw files and does Ctrl+F in the output,
 they MUST find it EXACTLY as it was written.
 
 ❌ DO NOT fix typos — "projct" stays "projct"
-❌ DO NOT fix spelling — "zou" stays "zou"  
+❌ DO NOT fix spelling — "zou" stays "zou"
 ❌ DO NOT fix grammar — "me go store" stays "me go store"
 ❌ DO NOT add words to user content
 ❌ DO NOT remove words from user content
@@ -140,7 +140,7 @@ use MediaQuery for sizing
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 6: VISUAL STYLING — HIGHLIGHT AI ADDITIONS
+SECTION 6: VISUAL STYLING — HIGHLIGHT AI ADDITIONS WITH YELLOW
 ═══════════════════════════════════════════════════════════════════════════════
 
 ### HTML Styling Rules:
@@ -150,10 +150,12 @@ SECTION 6: VISUAL STYLING — HIGHLIGHT AI ADDITIONS
    - Cards: White with subtle shadow
    - Text: Dark gray (#333)
 
-2. **AI-Added Content**: Highlight with LIGHT PURPLE
-   - Titles added by AI → light purple background (#e8daef or similar)
-   - Headers added by AI → light purple background
-   - Any organizing text AI added → light purple
+2. **AI-Added Content**: Highlight with YELLOW + Indicator Text
+   - Titles added by AI → yellow background (#fff3cd or similar)
+   - Headers added by AI → yellow background
+   - Any organizing text AI added → yellow background
+   - ADD SMALL INDICATOR: Include a small label like "🤖 AI" or "[AI Title]"
+     next to AI-generated titles to make it clear this was not user content
 
 3. **User Raw Data**: NO highlight
    - User's original content stays on white/neutral background
@@ -162,9 +164,21 @@ SECTION 6: VISUAL STYLING — HIGHLIGHT AI ADDITIONS
 ### Example CSS:
 ```css
 .ai-added {
-    background-color: #e8daef;  /* Light purple */
-    padding: 0.5rem;
+    background-color: #fff3cd;  /* Yellow highlight */
+    padding: 0.5rem 1rem;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ai-indicator {
+    font-size: 0.7em;
+    background-color: #ffc107;
+    color: #333;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
 }
 
 .user-content {
@@ -182,6 +196,14 @@ body {
     margin-bottom: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+```
+
+### Example HTML for AI Title:
+```html
+<div class="ai-added">
+    <span class="ai-indicator">🤖 AI</span>
+    <h5>Flutter Setup</h5>
+</div>
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -222,10 +244,10 @@ START
 │
 ├─→ Group into smart blocks (related content together)
 │
-├─→ Add simple titles (highlight in light purple)
+├─→ Add simple titles (highlight in YELLOW + "🤖 AI" indicator)
 │
 ├─→ Write to export/phase_01.md
-├─→ Write to export/phase_01.html (moderate theme, purple highlights)
+├─→ Write to export/phase_01.html (moderate theme, yellow AI highlights)
 │
 ├─→ CUT: Remove extracted content from inbox/ files
 │
@@ -243,7 +265,7 @@ Before you output, check ALL of these:
 □ Titles use simple, easy words (no complex vocabulary)
 □ Content is grouped in visual blocks/cards
 □ Related content stays together (questions near their context)
-□ AI-added content (titles) is highlighted in light purple
+□ AI-added content (titles) is highlighted in YELLOW with "🤖 AI" indicator
 □ Theme is moderate (not dark, not very light)
 □ Lists are proper lists, code is in code blocks
 
@@ -261,7 +283,7 @@ When done, show ONLY this:
 ✅ Extracted from [N] files
 ✅ Content preserved exactly (Ctrl+F works)
 ✅ Grouped into [N] blocks/cards
-✅ AI titles highlighted in light purple
+✅ AI titles highlighted in YELLOW with 🤖 indicator
 ✅ Written to export/phase_01.md
 ✅ Written to export/phase_01.html
 ✅ CUT: Content removed from inbox/ files
