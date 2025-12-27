@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 01 v2 - DWTS Export</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding-bottom: 3rem;
+        }
+
+        .container {
+            max-width: 900px;
+        }
+
+        .card {
+            background: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* AI-Added Content - YELLOW with indicator */
+        .ai-added {
+            background-color: #fff3cd;
+            /* Yellow */
+            padding: 0.75rem 1.25rem;
+            margin: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .ai-added h5 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .ai-indicator {
+            font-size: 0.7rem;
+            background-color: #ffc107;
+            color: #333;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* User Content - White/Neutral */
+        .user-content {
+            padding: 1.25rem;
+            background-color: white;
+        }
+
+        /* Preserve whitespace for text blocks */
+        .raw-text {
+            white-space: pre-wrap;
+            line-height: 1.7;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.35rem;
+        }
+
+        a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .header-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .header-bar h1 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header-bar p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+
+        .legend {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="header-bar">
+            <h1><i class="bi bi-file-earmark-text"></i> Phase 01 v2 Export</h1>
+            <p>Raw content preserved exactly • Yellow = AI-added titles</p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="d-flex gap-4 flex-wrap">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #fff3cd;"></div>
+                    <span><strong>Yellow</strong> = AI-added title/header</span>
+                    <span class="ai-indicator">🤖 AI</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: white; border: 1px solid #ddd;"></div>
+                    <span><strong>White</strong> = Your raw content (unchanged)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Block 1: Tools/Links -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Tools Links</h5>
+            </div>
+            <div class="user-content">
+                <ul>
+                    <li><a href="https://www.craft.do/">https://www.craft.do/</a></li>
+                    <li><a
+                            href="https://github.com/Ionaru/easy-markdown-editor">https://github.com/Ionaru/easy-markdown-editor</a>
+                    </li>
+                    <li><a href="https://ui.toast.com/">https://ui.toast.com/</a></li>
+                    <li><a href="https://ui.toast.com/tui-editor">https://ui.toast.com/tui-editor</a></li>
+                    <li><a
+                            href="https://github.com/ueberdosis/tiptap?spm=a2ty_o01.29997173.0.0.57a951712rRAIX">https://github.com/ueberdosis/tiptap?spm=a2ty_o01.29997173.0.0.57a951712rRAIX</a>
+                    </li>
+                    <li><a href="https://saga.so/use-cases/students">https://saga.so/use-cases/students</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Block 2: Process Steps -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Process Steps</h5>
+            </div>
+            <div class="user-content">
+                <ul>
+                    <li>0 — Submit raw data</li>
+                    <li>1 — Order data (no text edits)</li>
+                    <li>2 — Group and label (minor header edits only)</li>
+                    <li>3 — Flag gaps, redundancies, unclear sections</li>
+                    <li>4 — Resolve all flagged issues (user action required)</li>
+                    <li>5 — Approve final outline</li>
+                </ul>
+                <hr>
+                <div class="raw-text">No step proceeds until current step is explicitly approved
+                    Only Step 2 allows minor edits (headers/titles only)
+                    Raw content untouched in Steps 0, 1, 3, 4, 5
+
+                    🔒 No step proceeds until the current one is fully done and approved.
+                    ✍️ Only Step 2 allows edits — and only to headers/titles (e.g., shorten, clarify). All body text
+                    stays 100% original everywhere else.
+                    🚩 Step 4 flags must be resolved by you — no auto-fixing by me. If something's missing or unclear,
+                    I'll stop and wait for your input.
+                    ⏸️ Pause anytime. Resume later — your progress is saved at the last completed step.</div>
+            </div>
+        </div>
+
+        <!-- Block 3: Questions about Process -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Questions</h5>
+            </div>
+            <div class="user-content raw-text">Ok, What if after generating final data , user added new piece of Raw
+                info, should we restart ? what if user wrote raw info in middle of process</div>
+        </div>
+
+        <!-- Block 4: Alternative Steps -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Steps (Alt Version)</h5>
+            </div>
+            <div class="user-content">
+                <ul>
+                    <li>0- user raw data (notes, bullet points, drafts, references, etc.).</li>
+                    <li>1-order data /Suggest a logical flow (e.g., introduction → background → key points →
+                        conclusion), all letters/characters are untouched at all</li>
+                    <li>2-Categorize and group related ideas./ add labels and titles and headers (minor edits in titles
+                        and category)</li>
+                    <li>3- Flag gaps, redundancies, or unclear sections for your review.</li>
+                    <li>4- Present the ordered outline ( final draft) for approval .</li>
+                </ul>
+                <hr>
+                <div class="raw-text">NOTE : USER CANT PROCEDD to next metro step unless finish the PREV
+                    step-------------
+                    --------------------------
+                    (e.g., formatting for PDF, visual hierarchy, bilingual alignment, etc.).
+
+                    <a href="https://www.markdowntopdf.com/">https://www.markdowntopdf.com/</a>
+
+                    Metro Steps >
+                    ------------------------------
+                    I will give you scattered peices of Information , that need to be organized and then you you give me
+                    the final Output ,,
+
+                    Step one is that you get information and order them in best order
+
+                    after that I will walk you till we get final pdf file ( I will tell you each step what is required
+                    in this phase)
+
+                    important note, keep my raw data till I ask you to add or remove something
+
+                    <a
+                        href="https://chat.qwen.ai/c/536591b0-27ae-46cf-b078-503149711053">https://chat.qwen.ai/c/536591b0-27ae-46cf-b078-503149711053</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Block 5: Project Notes -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Project Notes</h5>
+            </div>
+            <div class="user-content">
+                <p><strong>Core Flow:</strong> Collect → Organize → Fix → Export.( If I give wrong order it should be
+                    aware)</p>
+                <hr>
+                <div class="raw-text">after making the agents , and still have to try other models , but here is the
+                    Notes :
+                    1- the shape of the output is only text in readme , no checklists even if it is better to represent
+                    it the todo list shape
+                    2- Well , since we talk about shapes , what about flow charts and other represetations too ?
+                    3- I want those Phases "Collect → Organize → Fix → Export." Not escpaed , It is sequenctial one by
+                    one , no skipp unless unders some rules "fixing by AI for example " ,, Also for each phase AI reply
+                    with ONLY one word , so if in Collect , it always hint that it is in collected mode or if receive
+                    data it says "Reveived" Not bla bla at all
+                    4- Before anything, there is a need to know the title of the document , not AI making it up
+                    5- Anootation , or markup and making something bold or italic , or second langage in doc like Arabic
+                    too
+                    6- Also if I want to make big file "that is like a book" will it be possible , or collect them later
+                    ?
+                    7-images , media and attachments
+                    8-Code snippets , need them in pretty image like the ones in HydePHP
+                    9-also need to remove duplicates later ?? Or keep it ?</div>
+            </div>
+        </div>
+
+        <!-- Block 6: Flutter Rules -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Flutter Rules</h5>
+            </div>
+            <div class="user-content raw-text">Organize my Flutter notes (text, code, images, todos) into a structured
+                document. Follow these rules:
+                1. Preserve my original content exactly as written.
+                2. Categorize under headings: "Page Layout," "Navigation," "Stateful vs Stateless," "Questions/TODOs."
+                3. Highlight AI notes/suggestions in yellow (e.g., "🟡 AI Note: [clarification]").
+                4. For code, use syntax highlighting.
+                5. Output: Generate both **Markdown**. only one markown that I can copy , the markdown include
+                everything in one shot</div>
+        </div>
+
+        <!-- Block 7: Main Idea -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Idea: Mind Chaos</h5>
+            </div>
+            <div class="user-content raw-text">Now I want to create an Idea to Solving Mind Chaos Problem, Notion and
+                obsedian and google docs exist if we want to create a Document and we know what to write and how to
+                organize , But For me there is another issue , in some use Cases , the issue if the ideas or notes or
+                thoughts are scattered (Example :write Note ,then maybe some screenshots ,maybe after a While write
+                question , maybe then write another note , maybe after the note I get another question and understand
+                and get the answer for the first question I wrote )..etc
+
+                Use cases are like :
+                1- lets imagine you remeber your life ,write Event at 1994 , then event at 2011 , then at 1995 , you
+                just memorize them randomly , but then you want to write organized book about the events in a certain
+                timeline and Chapters with titles
+
+                2- watching a course and keep writing notes ,writing questions of things to search later, putting some
+                pdfs or templates or screenshots or cards for something ..etc
+
+                3- planning to write an article , and collecting ideas and stories and eveything related , till it is
+                ready to be an article
+
+                4- maybe also writing CV ? you keep wriitng things about the career ?
+
+
+                Since we talked about different cases , each case need a different output file shape ( or in other words
+                , a template ), so also put this in consideration</div>
+        </div>
+
+        <!-- Block 8: Phases Description -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Phases Info</h5>
+            </div>
+            <div class="user-content raw-text">Here are some notes and questions and thoughts about this Idea including
+                how I think the phases of the project should be:
+                1- First of all , As You can see my Thoughts even about this idea are scattered , So gathering my ideas
+                and making a file with all things in my mind about it is a use case
+
+                PHASES are like this Collect → Organize → Fix → Export.
+
+                2- Phase 1 : The Idea first is to Allow free input mode, where i can keep writing small ( or big notes )
+                , and those notes or even files and documents should be RAW , Not touched till this input Phase is Done
+                , so I keep feeding with my ideas and thoughts ...etc and they are saved "Raw" , exactly as-is
+                collecting first, Or phase 1 can be a file with info But I will inject new Ideas/notes/data inside it
+
+                3- Phase 2 : Organizing and Fixing ,and this Has lots of steps , for example two pieces of info one
+                written at the begining or the collect phase and one written at end of collect phase , they could be
+                related and grouped under some title or category , so this phase include organizing and categorization
+                of notes and data and grouping them But this Grouping still keep them RAW and not touched ,, then Comes
+                the AI role , suggesting fixing ( for example redundnt spaces , or adding spaces , or fixing a typo or
+                even a phrase repeated twice and AI keep only one ) and ALthough AI here is editing but the new edit
+                should have some marks , and raw data should be kept ( maybe with Linethought or highlight but kept )
+                till user agree on the new Edit
+
+                4- Final Phase ,is that AI will add sections ( like the sections in Boosk ) where there is
+                representation that this piece of paragpraph or whatever is AI ( maybe a lamp icon at the beginnning)
+                Where AI can put links for suggestions or answers below questions or whatever</div>
+        </div>
+
+        <!-- Block 9: Requirements -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>What I Want</h5>
+            </div>
+            <div class="user-content raw-text">Notes and Things I want it for :
+                1- The files created should be good as a reference later If i need , easy to view and search inside
+                2- The Visual represenation is very important , representing Things I write into the Correct and best
+                representaiton , Maybe data are better as todo list or checklist ,or represented as a Graph or flowchart
+                or Videos to be emdedded or image gallery or tables, and this is related to the "tempalte" idea
+
+                3-Since I talked about the reprensation , better to be html ? or markdown ? or what ???? i dont know
+            </div>
+        </div>
+
+        <!-- Block 10: Questions -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Open Questions</h5>
+            </div>
+            <div class="user-content raw-text">A - question 1: is there something exist ( app or whatever ) to do so ?
+                B - question 2 : What is Best AI model to do so ? or all are equal ?
+                C - question 3 : what is best option to cover those requiremetns ? coded project , Agent or custom GPT ,
+                a CLI ?,Or creating a punch of prompts in a Folder and each time take those prompts in a new folder and
+                open it with AI editor and put things ( files and write notes in files and put images and media ...etc
+                )then make the Editor agent organize them ?</div>
+        </div>
+
+        <!-- Block 11: Style Preference -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Communication</h5>
+            </div>
+            <div class="user-content raw-text">Please Avoid Shitty talk and talking so much , or making something as
+                optimal solution , if you say something be brief and consice and Put pros and COns , I hate talking so
+                much and I want it as a Conversation between me and a person so when asking make the reponse not too
+                short nor too long</div>
+        </div>
+
+        <!-- Block 12: Image -->
+        <div class="card">
+            <div class="ai-added">
+                <span class="ai-indicator">🤖 AI</span>
+                <h5>Images</h5>
+            </div>
+            <div class="user-content">
+                <img src="assets/kb-block-editor.webp" class="img-fluid rounded" alt="kb-block-editor" />
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

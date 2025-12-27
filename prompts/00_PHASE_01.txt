@@ -20,7 +20,7 @@ You will do EXACTLY these steps. Nothing more. Nothing less.
 1. READ all files from `inbox/` folder (including subfolders)
 2. IDENTIFY what type each piece of data is (list, code, image, link, text)
 3. REPRESENT each data type in proper format (see Section 3)
-4. GROUP related content into blocks/cards (see Section 5)
+4. GROUP related content into blocks/cards (see Section 5 — CRITICAL)
 5. ADD simple titles/headers for each block (see Section 4)
 6. OUTPUT to `export/phase_01.md` and `export/phase_01.html`
 7. CUT — REMOVE the extracted content from the original inbox files
@@ -87,60 +87,159 @@ You MAY add titles and headers to organize content.
    ❌ BAD: "Action Items", "Issues Encountered", "Conceptual Framework"
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 5: GROUPING — SMART BLOCKS/CARDS
+SECTION 5: GROUPING — GRANULAR BLOCKS/CARDS (CRITICAL SECTION)
 ═══════════════════════════════════════════════════════════════════════════════
 
+🔴 THIS IS THE MOST IMPORTANT SECTION FOR OUTPUT QUALITY 🔴
+
 All content MUST be organized into visual blocks/cards.
+The KEY is to create MANY GRANULAR blocks, not few large ones.
 
-### SMART GROUPING RULES:
+### THE GOLDEN RULE: MORE CARDS IS BETTER
 
-1. Keep RELATED content together
+❌ WRONG APPROACH: Create 3-5 big blocks that lump everything together
+✅ CORRECT APPROACH: Create 10-20+ smaller, focused blocks
+
+### GRANULAR GROUPING RULES:
+
+1. **ONE TOPIC PER CARD**
+   - Each distinct topic, idea, or subject gets its OWN card
+   - If content changes topic, that's a NEW card
+   - When in doubt, split into MORE cards, not fewer
+
+2. **KEEP RELATED CONTENT TOGETHER**
    - If a question appears after some notes, keep the question WITH those notes
    - Questions belong in the block they relate to
+   - But if you have 5 unrelated questions, they become 5 separate cards OR 1 "Questions" card
 
-2. Do NOT group by type only
-   ❌ WRONG: Put all questions in one "Questions" block
-   ✅ RIGHT: Keep each question with its related content
+3. **NEVER LUMP UNRELATED CONTENT**
+   ❌ WRONG: Put all notes into one giant "Notes" block
+   ❌ WRONG: Put all questions into one "Questions" block
+   ✅ RIGHT: Each topic/subject gets its own block
 
-3. ONLY group unrelated items together
-   - If there are random/standalone questions with no context → group them
-   - If there are random notes with no clear relation → group them
+4. **SPLIT BY NATURAL BOUNDARIES**
+   Look for these signals to split into new cards:
+   - Change of topic/subject
+   - Horizontal lines (--- or ===) in raw data
+   - Clear paragraph breaks with different subjects
+   - Numbered lists that are complete thoughts
+   - Different types of information (links vs text vs steps)
 
-### EXAMPLE:
+### EXAMPLE — THE RIGHT WAY:
 
 RAW DATA:
 ```
 how to install flutter
 run flutter doctor
 what if flutter doctor fails?
-how to make responsive UI
-use MediaQuery for sizing
+
+I want to solve the mind chaos problem
+Use cases: 1. Life events 2. Course notes
+
+Links:
+https://craft.do
+https://github.com/something
+
+My communication preference: be brief, no long talk
 ```
 
-✅ CORRECT GROUPING:
+✅ CORRECT GRANULAR GROUPING (6 cards):
 ```
-[Block: Flutter Setup]
+[Card 1: Flutter Setup]
 - how to install flutter
 - run flutter doctor
 - Q: what if flutter doctor fails?
 
-[Block: Responsive UI]
-- how to make responsive UI
-- use MediaQuery for sizing
+[Card 2: Main Idea]
+I want to solve the mind chaos problem
+
+[Card 3: Use Cases]
+1. Life events 2. Course notes
+
+[Card 4: Links]
+- https://craft.do
+- https://github.com/something
+
+[Card 5: Communication Style]
+My communication preference: be brief, no long talk
 ```
 
-❌ WRONG GROUPING:
+❌ WRONG GROUPING (2 cards):
 ```
-[Block: Commands]
-- run flutter doctor
+[Card 1: Notes]
+(everything lumped together)
 
-[Block: Questions]
-- what if flutter doctor fails?
-- (separated from related content!)
+[Card 2: Links]
+(all links)
+```
+
+### MINIMUM CARD COUNT GUIDELINE:
+- For small input (1 page): Aim for 5-10 cards minimum
+- For medium input (2-5 pages): Aim for 10-20 cards
+- For large input (5+ pages): Aim for 20-50+ cards
+
+If you end up with fewer than 5 cards, you are probably lumping too much together.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 6: ASSETS & ATTACHMENTS
+═══════════════════════════════════════════════════════════════════════════════
+
+### RULE: DO NOT ANALYZE OR INTERPRET ASSETS
+
+Assets include: PDFs, Excel files, images, and other media files.
+
+⚠️ CRITICAL RULES FOR ASSETS:
+
+1. **DO NOT READ/ANALYZE** the content of assets
+   - Don't describe what's in an image
+   - Don't summarize PDF contents
+   - Don't interpret Excel data
+   - Just reference them as attachments
+
+2. **REFERENCE ONLY** — Treat assets as attachments to be linked
+   - Images: Embed as `![filename](path)`
+   - Other files: Link as `[filename](path)` or list as attachment
+
+3. **ASSET FOLDER STRUCTURE**:
+   - All assets go to: `export/assets/[project_folder]/`
+   - Project folder name: `[timestamp]_[meaningful_name]`
+   - Example: `export/assets/2024-01-15_flutter_notes/`
+
+4. **PLACEMENT**:
+   - If an asset clearly belongs to a specific card → attach to that card
+   - If assets are standalone/general → group them in an "Assets" or "Attachments" card
+   - Multiple assets can be in one card if they're related
+
+### EXAMPLE:
+```html
+<!-- Asset attached to specific card -->
+<div class="card">
+    <div class="ai-added">
+        <span class="ai-indicator">🤖 AI</span>
+        <h5>Flutter Setup</h5>
+    </div>
+    <div class="user-content">
+        - install flutter
+        - run flutter doctor
+        <img src="assets/2024-01-15_flutter/screenshot.webp" />
+    </div>
+</div>
+
+<!-- Standalone assets card -->
+<div class="card">
+    <div class="ai-added">
+        <span class="ai-indicator">🤖 AI</span>
+        <h5>Attachments</h5>
+    </div>
+    <div class="user-content">
+        <img src="assets/2024-01-15_flutter/diagram.webp" />
+        <p>📎 <a href="assets/2024-01-15_flutter/reference.pdf">reference.pdf</a></p>
+    </div>
+</div>
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 6: VISUAL STYLING — HIGHLIGHT AI ADDITIONS WITH YELLOW
+SECTION 7: VISUAL STYLING — HIGHLIGHT AI ADDITIONS WITH YELLOW
 ═══════════════════════════════════════════════════════════════════════════════
 
 ### HTML Styling Rules:
@@ -207,7 +306,7 @@ body {
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 7: OUTPUT FORMAT
+SECTION 8: OUTPUT FORMAT
 ═══════════════════════════════════════════════════════════════════════════════
 
 Create TWO files in `export/` folder:
@@ -219,7 +318,7 @@ Both files must contain IDENTICAL content (same words, same typos).
 User's raw data must be searchable in both files.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 8: CUT OPERATION — REMOVE FROM SOURCE
+SECTION 9: CUT OPERATION — REMOVE FROM SOURCE
 ═══════════════════════════════════════════════════════════════════════════════
 
 This is a CUT operation, NOT a COPY operation.
@@ -230,7 +329,7 @@ After extracting content, you MUST:
 3. The user will clean up empty files afterward
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 9: EXECUTION FLOW
+SECTION 10: EXECUTION FLOW
 ═══════════════════════════════════════════════════════════════════════════════
 
 ```
@@ -242,9 +341,12 @@ START
 │   ├─→ Identify type (list? code? image? text?)
 │   └─→ Keep content EXACTLY as-is (Ctrl+F must work)
 │
-├─→ Group into smart blocks (related content together)
+├─→ Group into GRANULAR blocks (many small cards, not few big ones)
+│   └─→ Remember: 10-20+ cards is normal, 3-5 cards is TOO FEW
 │
 ├─→ Add simple titles (highlight in YELLOW + "🤖 AI" indicator)
+│
+├─→ Handle assets: Copy to export/assets/[project]/, reference only
 │
 ├─→ Write to export/phase_01.md
 ├─→ Write to export/phase_01.html (moderate theme, yellow AI highlights)
@@ -255,7 +357,7 @@ END
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 10: SELF-CHECK BEFORE OUTPUT
+SECTION 11: SELF-CHECK BEFORE OUTPUT
 ═══════════════════════════════════════════════════════════════════════════════
 
 Before you output, check ALL of these:
@@ -263,16 +365,19 @@ Before you output, check ALL of these:
 □ Ctrl+F test: Any text from raw data can be found exactly in output
 □ I did NOT fix any typos, spelling, or grammar
 □ Titles use simple, easy words (no complex vocabulary)
-□ Content is grouped in visual blocks/cards
+□ Content is grouped in MANY GRANULAR blocks/cards (not few big ones)
+□ I have at least 5-10 cards for small input, 10-20+ for medium input
 □ Related content stays together (questions near their context)
 □ AI-added content (titles) is highlighted in YELLOW with "🤖 AI" indicator
 □ Theme is moderate (not dark, not very light)
 □ Lists are proper lists, code is in code blocks
+□ Assets are referenced but NOT analyzed/interpreted
+□ Assets copied to export/assets/[project_folder]/
 
 If ANY checkbox fails, START OVER.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 11: COMPLETION MESSAGE
+SECTION 12: COMPLETION MESSAGE
 ═══════════════════════════════════════════════════════════════════════════════
 
 When done, show ONLY this:
@@ -282,8 +387,9 @@ When done, show ONLY this:
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ Extracted from [N] files
 ✅ Content preserved exactly (Ctrl+F works)
-✅ Grouped into [N] blocks/cards
+✅ Grouped into [N] blocks/cards (granular grouping)
 ✅ AI titles highlighted in YELLOW with 🤖 indicator
+✅ Assets copied to export/assets/[project]/
 ✅ Written to export/phase_01.md
 ✅ Written to export/phase_01.html
 ✅ CUT: Content removed from inbox/ files
@@ -298,6 +404,11 @@ The #1 test: Can user Ctrl+F any text from raw data and find it EXACTLY?
 
 If YES → You did it right.
 If NO → You violated the rules.
+
+The #2 test: Did you create MANY granular cards or just a FEW big lumps?
+
+If MANY granular cards (10+) → You did it right.
+If FEW big cards (3-5) → You lumped too much together. REDO.
 
 ═══════════════════════════════════════════════════════════════════════════════
 END OF PHASE 01 INSTRUCTIONS

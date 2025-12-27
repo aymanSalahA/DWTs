@@ -7,6 +7,7 @@
 !                                                                               !
 !   STOP. READ THIS ENTIRE FILE BEFORE DOING ANYTHING.                          !
 !   NOTE: THIS PHASE MODIFIES CONTENT. PHASE 1 RULES OF "NO FIXES" ARE OVER.    !
+!   BUT: NO AI HINTS, NOTES, OR ANSWERS — THAT IS PHASE 3!                      !
 !                                                                               !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -22,12 +23,50 @@ CONSTRAINT: DO NOT modify Phase 1 files. Review them, but write only to Phase 2.
 Key Goals:
 1.  **Better Representation**: Use optimal UI components for each content type.
 2.  **Correction**: Fix typos, formatting issues, and grammar.
-3.  **Navigation**: Sidebar with anchor links (and sub-anchors where needed).
+3.  **Navigation**: Sidebar with anchor links (MANY categories and sub-anchors).
 4.  **Change Tracking**: Show what AI changed, refined, or removed.
 5.  **Raw View**: Toggle to see original Phase 1 content.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 2: CORRECTION & CLEANUP
+SECTION 2: WHAT PHASE 2 DOES AND DOES NOT DO
+═══════════════════════════════════════════════════════════════════════════════
+
+### ✅ PHASE 2 DOES:
+- Fix typos ("instl" → "install")
+- Fix grammar ("me go store" → "I go to the store")
+- Fix formatting ("$install" → "$ install")
+- Improve readability and structure
+- Add visual UI components (tabs, accordions, timelines)
+- Create navigation sidebar with categorized anchors
+- Track ALL changes visually
+
+### ❌ PHASE 2 DOES NOT:
+- Add AI hints, tips, or suggestions
+- Answer user's questions
+- Add explanations or clarifications
+- Insert "[AI Note: ...]" or similar
+- Provide recommendations
+- Add new content beyond structural organization
+
+🔴 CRITICAL: IF YOU SEE A QUESTION IN THE CONTENT, LEAVE IT AS A QUESTION.
+    DO NOT ADD AN AI ANSWER OR HINT. THAT IS PHASE 3!
+
+### EXAMPLE OF WHAT NOT TO DO:
+
+❌ WRONG (adding AI hints/answers):
+```html
+<p>Q: What if flutter doctor fails?</p>
+<p class="ai-created">🤖 AI Hint: Try reinstalling Flutter or check your PATH.</p>
+```
+
+✅ CORRECT (just edit the text, no hints):
+```html
+<p>Q: What if Flutter Doctor fails?</p>
+<!-- No AI answer - that's Phase 3 -->
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 3: CORRECTION & CLEANUP
 ═══════════════════════════════════════════════════════════════════════════════
 
 Unlike Phase 1, you MUST fix issues now, BUT you must NOT delete data silently.
@@ -49,23 +88,25 @@ Unlike Phase 1, you MUST fix issues now, BUT you must NOT delete data silently.
 
 ❌ DO NOT change the MEANING of the content.
 ❌ DO NOT delete "messy" data just to make it look clean. Polish the mess, don't hide it.
+❌ DO NOT add AI hints, notes, or answers to questions.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 3: CHANGE TRACKING — SHOW WHAT AI DID
+SECTION 4: CHANGE TRACKING — SHOW WHAT AI DID
 ═══════════════════════════════════════════════════════════════════════════════
 
 For EACH card/block, you must visually indicate what the AI changed.
 
 ### Three Types of Changes to Track:
 
-1. **AI REFINED** — Content was improved/corrected
+1. **AI REFINED** — Content was improved/corrected (typos, grammar)
    - Show with a ✨ icon or green highlight
    - Example: "install" (was "instl")
    - User can see the fix was made
 
-2. **AI CREATED** — Content that AI added (headers, explanations, structure)
+2. **AI CREATED** — STRUCTURAL content that AI added (headers, organization)
    - Show with a 🤖 icon or yellow highlight
    - Small badge: "[AI Added]" or "🤖"
+   - ⚠️ This is for STRUCTURE only (titles, cards, UI) — NOT for hints or answers!
 
 3. **AI OMITTED/CONDENSED** — Content that was removed or shortened
    - Show with ~~strikethrough~~ or a special indicator
@@ -78,7 +119,7 @@ For EACH card/block, you must visually indicate what the AI changed.
 <!-- Refined content -->
 <span class="ai-refined" title="Original: instl">install</span>
 
-<!-- Created by AI -->
+<!-- Created by AI (STRUCTURE ONLY, not hints/answers) -->
 <span class="ai-created">🤖 This section was organized by AI</span>
 
 <!-- Omitted content -->
@@ -120,7 +161,7 @@ For EACH card/block, you must visually indicate what the AI changed.
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 4: UI REPRESENTATION — USE THE RIGHT COMPONENT
+SECTION 5: UI REPRESENTATION — USE THE RIGHT COMPONENT
 ═══════════════════════════════════════════════════════════════════════════════
 
 Do NOT use one-size-fits-all approach. Choose the OPTIMAL UI for each content type.
@@ -172,38 +213,86 @@ Do NOT use one-size-fits-all approach. Choose the OPTIMAL UI for each content ty
 - NOT overdesigned (too many colors, animations, noise)
 - CLEAN, professional, documentation-style look
 - Cards should be readable at a glance
+- Code blocks should have copy buttons
+- Links should be clearly clickable
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 5: NAVIGATION & STRUCTURE
+SECTION 6: NAVIGATION & STRUCTURE — CRITICAL FOR QUALITY
 ═══════════════════════════════════════════════════════════════════════════════
+
+🔴 THE SIDEBAR IS AS IMPORTANT AS THE CONTENT 🔴
 
 Treat the output like a high-quality Documentation Website.
 
-1. **Sidebar Navigation**:
-   - Create a fixed/sticky sidebar on the left.
-   - List all Sections/Cards as clickable links.
-   - Group links logically (e.g., "Setup", "Concepts", "Troubleshooting").
+### 1. SIDEBAR NAVIGATION (MUST BE DETAILED):
 
-2. **Anchor Links**:
-   - Every card/block MUST have a unique ID.
-   - Sidebar links must jump smoothly to the corresponding card.
+Create a fixed/sticky sidebar on the left with MANY categories.
 
-3. **Sub-Anchors** (When Needed):
-   - If a section has multiple parts, add sub-anchors.
-   - Example:
-     ```
-     📈 Process Steps
-        ├── Step 0: Submit
-        ├── Step 1: Order
-        └── Step 2: Group
-     ```
+❌ WRONG (too few categories):
+```
+- Drafts & Ideas
+- Specifications
+- References
+```
 
-4. **Layout**:
-   - Two-column layout: Sidebar (Navigation) + Main Content (Cards).
-   - Responsive: Sidebar becomes a hamburger menu on mobile.
+✅ CORRECT (detailed categories with sub-anchors):
+```
+📁 Resources
+   └─ Tools & Links
+
+📁 Workflow
+   └─ Process Steps
+      ├─ Step 0: Submit
+      ├─ Step 1: Order
+      └─ Step 2: Group
+   └─ Phase Details
+
+📁 Concept
+   └─ Mind Chaos Idea
+   └─ Use Cases
+   └─ Requirements
+
+📁 Notes
+   └─ Project Notes
+   └─ Open Questions
+   └─ Flutter Rules
+
+📁 Media
+   └─ Images
+   └─ Attachments
+```
+
+### 2. SIDEBAR CATEGORIES:
+Group sidebar links logically into SECTIONS like:
+- Resources / Links
+- Workflow / Process
+- Concepts / Ideas
+- Notes / Documentation
+- Questions / FAQ
+- Media / Assets
+- Configuration / Settings
+(Use whatever categories fit the actual content)
+
+### 3. ANCHOR LINKS:
+- Every card/block MUST have a unique ID
+- Sidebar links must jump smoothly to the corresponding card
+
+### 4. SUB-ANCHORS (When Needed):
+If a section has multiple parts, add sub-anchors.
+Example for "Process Steps":
+```
+📈 Process Steps
+   ├── Step 0: Submit
+   ├── Step 1: Order
+   └── Step 2: Group
+```
+
+### 5. LAYOUT:
+- Two-column layout: Sidebar (Navigation) + Main Content (Cards)
+- Responsive: Sidebar becomes a hamburger menu on mobile
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 6: THE "DIFF" FEATURE — RAW VS ENHANCED
+SECTION 7: THE "DIFF" FEATURE — RAW VS ENHANCED
 ═══════════════════════════════════════════════════════════════════════════════
 
 For EACH card/block, you must generate a "Diff" or "Comparison" view.
@@ -216,9 +305,9 @@ The user wants to see what changed from Phase 1.
    - Button on every card: "Show Raw" / "Show Enhanced"
    - When toggled, shows the Original Raw Text from Phase 1
 
-3. **Change Indicators in Enhanced View** (from Section 3):
-   - ✨ Green for refined text
-   - 🤖 Yellow for AI-added content
+3. **Change Indicators in Enhanced View** (from Section 4):
+   - ✨ Green for refined text (typo/grammar fixes)
+   - 🤖 Yellow for AI-added STRUCTURE (not hints!)
    - ~~Strikethrough~~ for removed/condensed content
 
 ### Example Card Structure:
@@ -232,7 +321,7 @@ The user wants to see what changed from Phase 1.
         <!-- Enhanced View (default) -->
         <div id="enhanced-example" class="enhanced-view">
             <p>This is the <span class="ai-refined" title="was: corected">corrected</span> text.</p>
-            <p class="ai-created">🤖 AI organized this into a clear structure.</p>
+            <!-- NO AI hints or answers here! -->
         </div>
 
         <!-- Raw View (hidden by default) -->
@@ -244,17 +333,62 @@ The user wants to see what changed from Phase 1.
 ```
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 7: HTML STYLING (THEME)
+SECTION 8: ASSETS & ATTACHMENTS
+═══════════════════════════════════════════════════════════════════════════════
+
+### RULE: DO NOT ANALYZE OR INTERPRET ASSETS
+
+Assets include: PDFs, Excel files, images, and other media files.
+
+⚠️ CRITICAL RULES FOR ASSETS:
+
+1. **DO NOT READ/ANALYZE** the content of assets
+   - Don't describe what's in an image
+   - Don't summarize PDF contents
+   - Just display/link them
+
+2. **PLACEMENT**:
+   - If an asset was attached to a specific card in Phase 1 → keep it there
+   - If assets are standalone → create an "Assets" or "Attachments" section
+
+3. **DISPLAY**:
+   - Images: Display with proper sizing
+   - PDFs/Files: Show as downloadable links with filename
+   - Group multiple assets in a clean grid or list
+
+### EXAMPLE:
+```html
+<div class="doc-card" id="section-assets">
+    <div class="doc-card-header">
+        <h5>📎 Attachments</h5>
+    </div>
+    <div class="doc-card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="assets/project/screenshot.webp" class="img-fluid rounded" />
+            </div>
+        </div>
+        <p class="mt-3">
+            <a href="assets/project/reference.pdf" class="btn btn-outline-primary btn-sm">
+                📄 reference.pdf
+            </a>
+        </p>
+    </div>
+</div>
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 9: HTML STYLING (THEME)
 ═══════════════════════════════════════════════════════════════════════════════
 
 - **Framework**: Use Bootstrap 5 (easier for single-file output).
 - **Theme**: Professional, clean, "Documentation" look.
-- **Sidebar**: Dark or distinct background.
+- **Sidebar**: Dark or distinct background with categorized sections.
 - **Content Area**: Clean white/gray.
 - **Visuals**: Use shadows, rounded corners, smooth transitions.
 
 ### Color Scheme for Change Tracking:
-- Yellow (#fff3cd): AI-created/added content
+- Yellow (#fff3cd): AI-created/added STRUCTURE (not hints!)
 - Green (#d4edda): AI-refined/corrected content
 - Gray strikethrough (#6c757d): AI-omitted/removed content
 - Red badge (#dc3545): Important warnings
@@ -267,18 +401,18 @@ SECTION 7: HTML STYLING (THEME)
 - Links should be clearly clickable
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 8: EXECUTION FLOW
+SECTION 10: EXECUTION FLOW
 ═══════════════════════════════════════════════════════════════════════════════
 
 1. READ `export/phase_01.md`.
 2. PARSE the blocks/cards identified in Phase 1.
 3. FOR EACH BLOCK:
    a. **Preserve** the original text for the Raw view.
-   b. **Correct** the text (typos, grammar).
-   c. **Track** what you changed (refined, created, omitted).
+   b. **Correct** the text (typos, grammar) — BUT NO AI HINTS/ANSWERS.
+   c. **Track** what you changed (refined, created structure, omitted).
    d. **Enhance** the formatting (choose optimal UI component).
 4. GENERATE `export/phase_02.html`:
-   - Include Sidebar with anchors (and sub-anchors if needed).
+   - Include Sidebar with MANY categorized anchors (and sub-anchors).
    - Render Enhanced Cards with change indicators.
    - Embed "Raw vs Enhanced" toggle for each card.
 5. GENERATE `export/phase_02.md`:
@@ -286,24 +420,28 @@ SECTION 8: EXECUTION FLOW
 6. VERIFY: Do NOT modify original files in `inbox/` or `export/phase_01.*`.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 9: SELF-CHECK BEFORE OUTPUT
+SECTION 11: SELF-CHECK BEFORE OUTPUT
 ═══════════════════════════════════════════════════════════════════════════════
 
 Before you output, check ALL of these:
 
 □ All links/URLs from Phase 1 exist in Phase 2
 □ No content was silently deleted
-□ AI changes are visually indicated (refined ✨, created 🤖, omitted ~~)
+□ AI changes are visually indicated (refined ✨, created structure 🤖, omitted ~~)
 □ Each card has a "Show Raw" toggle
-□ Navigation sidebar has anchors to all sections
+□ Navigation sidebar has MANY categorized anchors (not just 3-5 links!)
+□ Sidebar has logical sections (Resources, Workflow, Concepts, etc.)
+□ Sub-anchors exist for complex sections (like Process Steps)
 □ UI components are appropriate for the content type
 □ Cards are balanced (not too plain, not over-designed)
 □ Code blocks have syntax highlighting and copy buttons
+□ ❌ I did NOT add any AI hints, notes, or answers to questions
+□ Assets are displayed but NOT analyzed
 
 If ANY checkbox fails, FIX IT before outputting.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 10: COMPLETION MESSAGE
+SECTION 12: COMPLETION MESSAGE
 ═══════════════════════════════════════════════════════════════════════════════
 
 When done, show:
@@ -313,10 +451,11 @@ When done, show:
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ Input: Read from export/phase_01.md
 ✅ Corrections: Applied (typos, grammar, formatting)
-✅ Change Tracking: ✨ Refined | 🤖 Created | ~~Omitted~~
-✅ Navigation: Sidebar with anchors + sub-anchors
+✅ Change Tracking: ✨ Refined | 🤖 Created Structure | ~~Omitted~~
+✅ Navigation: Sidebar with [N] categorized sections + sub-anchors
 ✅ UI Components: Optimal representation for each content type
 ✅ Raw Toggle: "Show Raw" available on every card
+✅ No AI hints/answers added (that's Phase 3)
 ✅ Written to export/phase_02.md (Clean content)
 ✅ Written to export/phase_02.html (Full interactive documentation)
 ━━━━━━━━━━━━━━━━━━━━━━

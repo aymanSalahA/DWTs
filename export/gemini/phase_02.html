@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 02 Export</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Layout */
+        .wrapper {
+            display: flex;
+            align-items: stretch;
+        }
+
+        #sidebar {
+            min-width: 250px;
+            max-width: 250px;
+            min-height: 100vh;
+            background: #343a40;
+            color: #fff;
+            transition: all 0.3s;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        #sidebar .sidebar-header {
+            padding: 20px;
+            background: #212529;
+        }
+
+        #sidebar ul.components {
+            padding: 20px 0;
+            border-bottom: 1px solid #4b545c;
+        }
+
+        #sidebar ul li a {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            display: block;
+            color: #adb5bd;
+            text-decoration: none;
+        }
+
+        #sidebar ul li a:hover {
+            color: #fff;
+            background: #495057;
+        }
+
+        #sidebar ul li.active>a {
+            color: #fff;
+            background: #007bff;
+        }
+
+        #content {
+            width: 100%;
+            padding: 20px;
+            margin-left: 250px;
+            transition: all 0.3s;
+        }
+
+        /* Cards */
+        .doc-card {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .doc-card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .doc-card-header h5 {
+            margin: 0;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doc-card-body {
+            padding: 1.5rem;
+        }
+
+        /* AI Indicators */
+        .ai-refined {
+            background-color: #d4edda;
+            padding: 0 3px;
+            border-radius: 3px;
+            cursor: help;
+            border-bottom: 1px dotted #28a745;
+        }
+
+        .ai-created {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ffeeba;
+        }
+
+        .ai-omitted {
+            color: #6c757d;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .ai-omitted-details {
+            background-color: #f8f9fa;
+            border-left: 3px solid #ffc107;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #sidebar {
+                margin-left: -250px;
+            }
+
+            #sidebar.active {
+                margin-left: 0;
+            }
+
+            #content {
+                margin-left: 0;
+            }
+        }
+
+        /* Raw View */
+        .raw-view {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px dashed #ced4da;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 1rem;
+        }
+
+        .btn-toggle-raw {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+        /* UI Components */
+        .code-block {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .code-block pre {
+            background: #2d2d2d;
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        .badge-soft {
+            padding: 0.35em 0.65em;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.75em;
+        }
+
+        .badge-soft-primary {
+            background-color: #cfe2ff;
+            color: #084298;
+        }
+
+        .timeline {
+            border-left: 2px solid #e9ecef;
+            margin-left: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.15rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #007bff;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #e9ecef;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>📖 DWTs</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li><a href="#section-drafts">Drafts & Ideas</a></li>
+                <li><a href="#section-specs">Specifications</a></li>
+                <li><a href="#section-notes">Notes & Prompts</a></li>
+                <li><a href="#section-refs">References</a></li>
+                <li><a href="#section-assets">Assets</a></li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <h2 class="mb-4">Phase 02: Enhancement & Organization</h2>
+
+            <!-- Block 1: Project Drafts -->
+            <div class="doc-card" id="section-drafts">
+                <div class="doc-card-header">
+                    <h5><span class="badge bg-warning text-dark me-2">🤖 AI</span> Project Drafts</h5>
+                    <button class="btn btn-outline-secondary btn-toggle-raw" onclick="toggleView('drafts')">Show
+                        Raw</button>
+                </div>
+                <div class="doc-card-body">
+                    <!-- Enhanced -->
+                    <div id="enhanced-drafts" class="enhanced-view">
+                        <p class="lead">Now I want to create an <span class="ai-refined" title="was: Idea">idea</span>
+                            for solving the "Mind Chaos Problem".</p>
+
+                        <div class="alert alert-light border">
+                            <p class="mb-0"><strong>Context:</strong> Notion, <span class="ai-refined"
+                                    title="was: obsedian">Obsidian</span>, and Google Docs exist for creating organized
+                                documents. However, for me, there is another issue: in some use cases, ideas, notes, or
+                                thoughts are scattered.</p>
+                        </div>
+
+                        <p><em>Example:</em> I write a note, then maybe some screenshots, then after a while write a
+                            question, then another note. Later, I understand and answer the first question.</p>
+
+                        <h6 class="mt-4 text-muted">Use Cases</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">1. Life Events</h6>
+                                        <p class="card-text small">Imagine you <span class="ai-refined"
+                                                title="was: remeber">remember</span> your life: an event in 1994, then
+                                            2011, then 1995. You memorize them randomly but want to write an organized
+                                            book with a timeline and titled chapters.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">2. Course Notes</h6>
+                                        <p class="card-text small">Watching a course and keeping notes, writing
+                                            questions to search later, adding PDFs, templates, screenshots, or cards.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">3. Article Planning</h6>
+                                        <p class="card-text small">Planning to write an article by collecting ideas,
+                                            stories, and everything related until it is ready.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 shadow-sm bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">4. Career/CV</h6>
+                                        <p class="card-text small">Writing a CV? You keep <span class="ai-refined"
+                                                title="was: wriitng">writing</span> things about your career.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <span class="ai-created">🤖 AI Note:</span> Since we talked about different cases, each case
+                            needs a different output file shape (or template), so putting this in consideration is
+                            important.
+                        </div>
+
+                        <hr>
+
+                        <h6 class="mt-4">Proposed Project Phases</h6>
+                        <p>First of all, as you can see, my thoughts even about this idea are scattered. Gathering my
+                            ideas and making a file with everything in my mind is a use case itself.</p>
+
+                        <div class="text-center my-4">
+                            <span class="badge rounded-pill bg-primary p-2 px-3">Collect</span>
+                            <span class="text-muted mx-2">→</span>
+                            <span class="badge rounded-pill bg-secondary p-2 px-3">Organize</span>
+                            <span class="text-muted mx-2">→</span>
+                            <span class="badge rounded-pill bg-info text-dark p-2 px-3">Fix</span>
+                            <span class="text-muted mx-2">→</span>
+                            <span class="badge rounded-pill bg-success p-2 px-3">Export</span>
+                        </div>
+
+                        <ul class="timeline">
+                            <li class="timeline-item">
+                                <strong>Phase 1: Free Input Mode</strong>
+                                <p class="small text-muted mb-0">Allow free input where I can keep writing small (or
+                                    big) notes. These notes/files should be <strong>RAW</strong> and <span
+                                        class="ai-refined" title="was: Not touched">untouched</span> until this phase is
+                                    done. I keep feeding ideas, and they are saved "Raw," exactly as-is.</p>
+                            </li>
+                            <li class="timeline-item">
+                                <strong>Phase 2: Organizing and Fixing</strong>
+                                <p class="small text-muted mb-0">Organize and categorize notes (e.g., grouping related
+                                    info from the beginning and end of Phase 1). Keep the content raw but grouped. <br>
+                                    <em>AI Role:</em> Suggest fixes (redundant spaces, typos, repeated phrases). New
+                                    edits should have marks (yellow highlight/strikethrough) while keeping raw data
+                                    available until user approval.
+                                </p>
+                            </li>
+                            <li class="timeline-item">
+                                <strong>Final Phase: AI Sections</strong>
+                                <p class="small text-muted mb-0">AI will add sections (like in books) with
+                                    representation indicating AI content (e.g., a lamp icon). AI can put links for
+                                    suggestions or answers below questions.</p>
+                            </li>
+                        </ul>
+
+                        <h6 class="mt-4">Requirements & Questions</h6>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><strong>Reference Quality:</strong> Files should be good for
+                                future reference (easy to view/search).</li>
+                            <li class="list-group-item"><strong>Visual Representation:</strong> Use optimal
+                                representations (Todo lists, graphs, flowcharts, videos, image galleries, tables).
+                                Related to the "template" idea.</li>
+                            <li class="list-group-item"><strong>Format:</strong> HTML? Markdown? <span
+                                    class="ai-refined" title="was: ???? i dont know">(Unsure)</span>.</li>
+                        </ul>
+
+                        <div class="accordion" id="accordionQuestions">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne">
+                                        Q1: Is there an existing app for this?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionQuestions">
+                                    <div class="accordion-body">Is there something (app or whatever) that exists to do
+                                        so?</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo">
+                                        Q2: Best AI Model?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionQuestions">
+                                    <div class="accordion-body">What is the best AI model to do so? Or are all equal?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree">
+                                        Q3: Implementation Options?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionQuestions">
+                                    <div class="accordion-body">What is the best option? Coded project, Agent, Custom
+                                        GPT, CLI? Or creating a <span class="ai-refined" title="was: punch">bunch</span>
+                                        of prompts in a folder, running them with an AI editor to organize things?</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Raw -->
+                    <div id="raw-drafts" class="raw-view" style="display:none;">
+                        Now I want to create an Idea to Solving Mind Chaos Problem, Notion and obsedian and google docs
+                        exist if we want to create a Document and we know what to write and how to organize , But For me
+                        there is another issue , in some use Cases , the issue if the ideas or notes or thoughts are
+                        scattered (Example :write Note ,then maybe some screenshots ,maybe after a While write question
+                        , maybe then write another note , maybe after the note I get another question and understand and
+                        get the answer for the first question I wrote )..etc
+
+                        Use cases are like :
+                        1- lets imagine you remeber your life ,write Event at 1994 , then event at 2011 , then at 1995 ,
+                        you just memorize them randomly , but then you want to write organized book about the events in
+                        a certain timeline and Chapters with titles
+
+                        2- watching a course and keep writing notes ,writing questions of things to search later,
+                        putting some pdfs or templates or screenshots or cards for something ..etc
+
+                        3- planning to write an article , and collecting ideas and stories and eveything related , till
+                        it is ready to be an article
+
+                        4- maybe also writing CV ? you keep wriitng things about the career ?
+
+                        Since we talked about different cases , each case need a different output file shape ( or in
+                        other words , a template ), so also put this in consideration
+
+                        Here are some notes and questions and thoughts about this Idea including how I think the phases
+                        of the project should be:
+                        1- First of all , As You can see my Thoughts even about this idea are scattered , So gathering
+                        my ideas and making a file with all things in my mind about it is a use case
+
+                        PHASES are like this Collect → Organize → Fix → Export.
+
+                        2- Phase 1 : The Idea first is to Allow free input mode, where i can keep writing small ( or big
+                        notes ) , and those notes or even files and documents should be RAW , Not touched till this
+                        input Phase is Done , so I keep feeding with my ideas and thoughts ...etc and they are saved
+                        "Raw" , exactly as-is collecting first, Or phase 1 can be a file with info But I will inject new
+                        Ideas/notes/data inside it
+
+                        3- Phase 2 : Organizing and Fixing ,and this Has lots of steps , for example two pieces of info
+                        one written at the begining or the collect phase and one written at end of collect phase , they
+                        could be related and grouped under some title or category , so this phase include organizing and
+                        categorization of notes and data and grouping them But this Grouping still keep them RAW and not
+                        touched ,, then Comes the AI role , suggesting fixing ( for example redundnt spaces , or adding
+                        spaces , or fixing a typo or even a phrase repeated twice and AI keep only one ) and ALthough AI
+                        here is editing but the new edit should have some marks , and raw data should be kept ( maybe
+                        with Linethought or highlight but kept ) till user agree on the new Edit
+
+                        4- Final Phase ,is that AI will add sections ( like the sections in Boosk ) where there is
+                        representation that this piece of paragpraph or whatever is AI ( maybe a lamp icon at the
+                        beginnning) Where AI can put links for suggestions or answers below questions or whatever
+
+                        Notes and Things I want it for :
+                        1- The files created should be good as a reference later If i need , easy to view and search
+                        inside
+                        2- The Visual represenation is very important , representing Things I write into the Correct and
+                        best representaiton , Maybe data are better as todo list or checklist ,or represented as a Graph
+                        or flowchart or Videos to be emdedded or image gallery or tables, and this is related to the
+                        "tempalte" idea
+
+                        3-Since I talked about the reprensation , better to be html ? or markdown ? or what ???? i dont
+                        know
+
+                        A - question 1: is there something exist ( app or whatever ) to do so ?
+                        B - question 2 : What is Best AI model to do so ? or all are equal ?
+                        C - question 3 : what is best option to cover those requiremetns ? coded project , Agent or
+                        custom GPT , a CLI ?,Or creating a punch of prompts in a Folder and each time take those prompts
+                        in a new folder and open it with AI editor and put things ( files and write notes in files and
+                        put images and media ...etc )then make the Editor agent organize them ?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 2: Specifications -->
+            <div class="doc-card" id="section-specs">
+                <div class="doc-card-header">
+                    <h5><span class="badge bg-warning text-dark me-2">🤖 AI</span> Specifications</h5>
+                    <button class="btn btn-outline-secondary btn-toggle-raw" onclick="toggleView('specs')">Show
+                        Raw</button>
+                </div>
+                <div class="doc-card-body">
+                    <div id="enhanced-specs" class="enhanced-view">
+                        <!-- Steps -->
+                        <div class="list-group mb-4">
+                            <div class="list-group-item bg-light"><strong>0 — Submit raw data</strong></div>
+                            <div class="list-group-item bg-light"><strong>1 — Order data</strong> (no text edits)</div>
+                            <div class="list-group-item border-warning"><strong>2 — Group and label</strong> (minor
+                                header edits only) <span class="badge bg-warning text-dark">Minor Edits</span></div>
+                            <div class="list-group-item"><strong>3 — Flag gaps</strong>, redundancies, unclear sections
+                            </div>
+                            <div class="list-group-item list-group-item-danger"><strong>4 — Resolve all flagged
+                                    issues</strong> (user action required)</div>
+                            <div class="list-group-item list-group-item-success"><strong>5 — Approve final
+                                    outline</strong></div>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <strong>🔒 Rules:</strong>
+                            <ul class="mb-0">
+                                <li>No step proceeds until the current one is fully done and approved.</li>
+                                <li>✍️ Only Step 2 allows edits — and only to headers/titles (e.g., shorten, clarify).
+                                    All body text stays 100% original everywhere else.</li>
+                                <li>🚩 Step 4 flags must be resolved by you — no auto-fixing by me.</li>
+                                <li>⏸️ Pause anytime. Resume later — progress saved.</li>
+                            </ul>
+                        </div>
+
+                        <p><strong>Scenario Question:</strong> What if after generating final data, the user adds a new
+                            piece of Raw info? Should we restart? What if the user wrote raw info in the middle of the
+                            process?</p>
+
+                        <h6 class="mt-4">Metro Steps & Requirements</h6>
+                        <p>User <span class="ai-refined" title="was: PROCEDD">CANNOT PROCEED</span> to the next metro
+                            step unless they finish the PREVIOUS step.</p>
+                        <p>Example: Formatting for PDF, Visual hierarchy, Bilingual alignment.</p>
+                        <a href="https://www.markdowntopdf.com/" class="btn btn-sm btn-outline-primary"
+                            target="_blank">MarkdownToPDF</a>
+
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h6 class="card-title">User Workflow</h6>
+                                <p>1. User gives scattered pieces of information.</p>
+                                <p>2. Organize them in the best order.</p>
+                                <p>3. Walk through until the final PDF file is obtained.</p>
+                                <p class="text-danger"><strong>Important Note:</strong> Keep raw data until the user
+                                    asks to add or remove something.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="raw-specs" class="raw-view" style="display:none;">
+                        0 — Submit raw data
+                        1 — Order data (no text edits)
+                        2 — Group and label (minor header edits only)
+                        3 — Flag gaps, redundancies, unclear sections
+                        4 — Resolve all flagged issues (user action required)
+                        5 — Approve final outline
+
+                        No step proceeds until current step is explicitly approved
+                        Only Step 2 allows minor edits (headers/titles only)
+                        Raw content untouched in Steps 0, 1, 3, 4, 5
+
+                        🔒 No step proceeds until the current one is fully done and approved.
+                        ✍️ Only Step 2 allows edits — and only to headers/titles (e.g., shorten, clarify). All body text
+                        stays 100% original everywhere else.
+                        🚩 Step 4 flags must be resolved by you — no auto-fixing by me. If something’s missing or
+                        unclear, I’ll stop and wait for your input.
+                        ⏸️ Pause anytime. Resume later — your progress is saved at the last completed step.
+
+                        Ok, What if after generating final data , user added new piece of Raw info, should we restart ?
+                        what if user wrote raw info in middle of process
+
+                        0- user raw data (notes, bullet points, drafts, references, etc.).
+                        1-order data /Suggest a logical flow (e.g., introduction → background → key points →
+                        conclusion), all letters/characters are untouched at all
+                        2-Categorize and group related ideas./ add labels and titles and headers (minor edits in titles
+                        and category)
+                        3- Flag gaps, redundancies, or unclear sections for your review.
+                        4- Present the ordered outline ( final draft) for approval .
+
+                        NOTE : USER CANT PROCEDD to next metro step unless finish the PREV step-------------
+                        (e.g., formatting for PDF, visual hierarchy, bilingual alignment, etc.).
+                        [https://www.markdowntopdf.com/](https://www.markdowntopdf.com/)
+                        Metro Steps >
+                        I will give you scattered peices of Information , that need to be organized and then you you
+                        give me the final Output ,,
+                        Step one is that you get information and order them in best order
+                        after that I will walk you till we get final pdf file ( I will tell you each step what is
+                        required in this phase)
+                        important note, keep my raw data till I ask you to add or remove something
+                        [https://chat.qwen.ai/c/536591b0-27ae-46cf-b078-503149711053](https://chat.qwen.ai/c/536591b0-27ae-46cf-b078-503149711053)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 3: Notes & Prompts -->
+            <div class="doc-card" id="section-notes">
+                <div class="doc-card-header">
+                    <h5><span class="badge bg-warning text-dark me-2">🤖 AI</span> Notes & Prompts</h5>
+                    <button class="btn btn-outline-secondary btn-toggle-raw" onclick="toggleView('notes')">Show
+                        Raw</button>
+                </div>
+                <div class="doc-card-body">
+                    <div id="enhanced-notes" class="enhanced-view">
+                        <div class="alert alert-info">
+                            <strong>Phases:</strong> Collect → Organize → Fix → Export. (If I give wrong order, it
+                            should be aware).
+                        </div>
+
+                        <h6>Development Notes:</h6>
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item">1. Phase 1 output shape: text in README (no checklists yet).
+                            </li>
+                            <li class="list-group-item">2. Check representation options: Flow charts, etc.</li>
+                            <li class="list-group-item">3. Phases must be sequential. No <span class="ai-refined"
+                                    title="was: skipp">skipping</span> unless under rules. AI reply: One word only
+                                (e.g., "Received"). No extra talk.</li>
+                            <li class="list-group-item">4. Title must be known before starting (AI shouldn't make it
+                                up).</li>
+                            <li class="list-group-item">5. <span class="ai-refined"
+                                    title="was: Anootation">Annotation</span>/Markup needed (Bold, Italic, Second
+                                language support).</li>
+                            <li class="list-group-item">6. Big files (Book-like) support? Or collect later?</li>
+                            <li class="list-group-item">7. Support for images, media, and attachments.</li>
+                            <li class="list-group-item">8. Code snippets: Need pretty image formatting (like HydePHP).
+                            </li>
+                            <li class="list-group-item">9. Deduplication strategy: Remove later or keep?</li>
+                        </ul>
+
+                        <h6>Prompt: Flutter Notes Organization</h6>
+                        <div class="p-3 bg-light border rounded">
+                            <p>Organize my Flutter notes (text, code, images, todos) into a structured document. Follow
+                                these rules:</p>
+                            <ol>
+                                <li>Preserve my original content exactly as written.</li>
+                                <li>Categorize under headings: "Page Layout," "Navigation," "Stateful vs Stateless,"
+                                    "Questions/TODOs."</li>
+                                <li>Highlight AI notes/suggestions in yellow (e.g., "🟡 AI Note: [clarification]").</li>
+                                <li>For code, use syntax highlighting.</li>
+                                <li>Output: Generate both <strong>Markdown</strong>. Only one markdown that I can copy,
+                                    including everything in one shot.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div id="raw-notes" class="raw-view" style="display:none;">
+                        Collect → Organize → Fix → Export.( If I give wrong order it should be aware)
+
+                        after making the agents , and still have to try other models , but here is the Notes :
+                        1- the shape of the output is only text in readme , no checklists even if it is better to
+                        represent it the todo list shape
+                        2- Well , since we talk about shapes , what about flow charts and other represetations too ?
+                        3- I want those Phases "Collect → Organize → Fix → Export." Not escpaed , It is sequenctial one
+                        by one , no skipp unless unders some rules "fixing by AI for example " ,, Also for each phase AI
+                        reply with ONLY one word , so if in Collect , it always hint that it is in collected mode or if
+                        receive data it says "Reveived" Not bla bla at all
+                        4- Before anything, there is a need to know the title of the document , not AI making it up
+                        5- Anootation , or markup and making something bold or italic , or second langage in doc like
+                        Arabic too
+                        6- Also if I want to make big file "that is like a book" will it be possible , or collect them
+                        later ?
+                        7-images , media and attachments
+                        8-Code snippets , need them in pretty image like the ones in HydePHP
+                        9-also need to remove duplicates later ?? Or keep it ?
+
+                        Organize my Flutter notes (text, code, images, todos) into a structured document. Follow these
+                        rules:
+                        1. Preserve my original content exactly as written.
+                        2. Categorize under headings: "Page Layout," "Navigation," "Stateful vs Stateless,"
+                        "Questions/TODOs."
+                        3. Highlight AI notes/suggestions in yellow (e.g., "🟡 AI Note: [clarification]").
+                        4. For code, use syntax highlighting.
+                        5. Output: Generate both **Markdown**. only one markown that I can copy , the markdown include
+                        everything in one shot
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 4: References -->
+            <div class="doc-card" id="section-refs">
+                <div class="doc-card-header">
+                    <h5><span class="badge bg-warning text-dark me-2">🤖 AI</span> References</h5>
+                    <button class="btn btn-outline-secondary btn-toggle-raw" onclick="toggleView('refs')">Show
+                        Raw</button>
+                </div>
+                <div class="doc-card-body">
+                    <div id="enhanced-refs" class="enhanced-view">
+                        <div class="list-group">
+                            <a href="https://www.craft.do/" class="list-group-item list-group-item-action"
+                                target="_blank">🔗 craft.do</a>
+                            <a href="https://github.com/Ionaru/easy-markdown-editor"
+                                class="list-group-item list-group-item-action" target="_blank">🔗
+                                Ionaru/easy-markdown-editor</a>
+                            <a href="https://ui.toast.com/" class="list-group-item list-group-item-action"
+                                target="_blank">🔗 ui.toast.com</a>
+                            <a href="https://ui.toast.com/tui-editor" class="list-group-item list-group-item-action"
+                                target="_blank">🔗 ui.toast.com/tui-editor</a>
+                            <a href="https://github.com/ueberdosis/tiptap?spm=a2ty_o01.29997173.0.0.57a951712rRAIX"
+                                class="list-group-item list-group-item-action" target="_blank">🔗 tiptap (GitHub)</a>
+                            <a href="https://saga.so/use-cases/students" class="list-group-item list-group-item-action"
+                                target="_blank">🔗 Saga.so Use Cases</a>
+                        </div>
+                    </div>
+
+                    <div id="raw-refs" class="raw-view" style="display:none;">
+                        [https://www.craft.do/](https://www.craft.do/)
+
+                        [https://github.com/Ionaru/easy-markdown-editor](https://github.com/Ionaru/easy-markdown-editor)
+                        [https://ui.toast.com/](https://ui.toast.com/)
+                        [https://ui.toast.com/tui-editor](https://ui.toast.com/tui-editor)
+
+                        [https://github.com/ueberdosis/tiptap?spm=a2ty_o01.29997173.0.0.57a951712rRAIX](https://github.com/ueberdosis/tiptap?spm=a2ty_o01.29997173.0.0.57a951712rRAIX)
+
+                        [https://saga.so/use-cases/students](https://saga.so/use-cases/students)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 5: Assets -->
+            <div class="doc-card" id="section-assets">
+                <div class="doc-card-header">
+                    <h5><span class="badge bg-warning text-dark me-2">🤖 AI</span> Assets</h5>
+                    <button class="btn btn-outline-secondary btn-toggle-raw" onclick="toggleView('assets')">Show
+                        Raw</button>
+                </div>
+                <div class="doc-card-body">
+                    <div id="enhanced-assets" class="enhanced-view">
+                        <div class="card" style="width: 18rem;">
+                            <img src="../inbox/dwt/kb-block-editor.webp" class="card-img-top" alt="kb-block-editor">
+                            <div class="card-body">
+                                <p class="card-text">kb-block-editor.webp</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="raw-assets" class="raw-view" style="display:none;">
+                        ![](../inbox/dwt/kb-block-editor.webp)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleView(id) {
+            const enhanced = document.getElementById('enhanced-' + id);
+            const raw = document.getElementById('raw-' + id);
+            const btn = event.target;
+
+            if (raw.style.display === 'none') {
+                raw.style.display = 'block';
+                enhanced.style.display = 'none';
+                btn.textContent = 'Show Enhanced';
+                btn.classList.add('active');
+            } else {
+                raw.style.display = 'none';
+                enhanced.style.display = 'block';
+                btn.textContent = 'Show Raw';
+                btn.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>
