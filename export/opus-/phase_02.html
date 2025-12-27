@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWTS Project - Phase 02</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+        }
+
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: #1a1f36;
+            color: #fff;
+            overflow-y: auto;
+            padding: 1.5rem 1rem;
+            z-index: 1000;
+        }
+
+        .sidebar h5 {
+            color: #a0aec0;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e0;
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin: 2px 0;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .sidebar .sub-link {
+            padding-left: 1.5rem;
+            font-size: 0.85rem;
+            color: #8a94a6;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .doc-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .doc-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .doc-card-header h5 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-toggle {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+        }
+
+        .ai-refined {
+            background: #d4edda;
+            padding: 1px 4px;
+            border-radius: 3px;
+            cursor: help;
+        }
+
+        .ai-created {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+
+        .raw-view {
+            display: none;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .enhanced-view {
+            line-height: 1.7;
+        }
+
+        table {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        th {
+            background: #f1f3f4;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .question-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff9800;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .highlight-box {
+            background: #e3f2fd;
+            border-left: 3px solid #2196f3;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;">📄 DWTS Project</div>
+        <h5>📁 Overview</h5>
+        <a href="#concept">Mind Chaos Problem</a>
+        <a href="#usecases">Use Cases</a>
+        <a class="sub-link" href="#uc-timeline">↳ Life Events</a>
+        <a class="sub-link" href="#uc-course">↳ Course Notes</a>
+        <a class="sub-link" href="#uc-article">↳ Article Planning</a>
+        <a class="sub-link" href="#uc-cv">↳ CV Building</a>
+        <h5>📁 Workflow</h5>
+        <a href="#phases">Project Phases</a>
+        <a class="sub-link" href="#phase1">↳ Phase 1: Collect</a>
+        <a class="sub-link" href="#phase2">↳ Phase 2: Organize</a>
+        <a class="sub-link" href="#phase3">↳ Final Phase</a>
+        <a href="#steps">Workflow Steps</a>
+        <a href="#rules">Workflow Rules</a>
+        <h5>📁 Requirements</h5>
+        <a href="#goals">Goals</a>
+        <a href="#format">Format Question</a>
+        <a href="#questions">Open Questions</a>
+        <h5>📁 Resources</h5>
+        <a href="#tools">Competing Tools</a>
+        <a href="#export">Export Options</a>
+        <a href="#chat">Reference Chat</a>
+        <h5>📁 Notes</h5>
+        <a href="#testing">Testing Notes</a>
+        <a href="#flutter">Flutter Prompt</a>
+        <a href="#attachments">Attachments</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>DWTS Project</h1>
+            <p class="mb-0 opacity-75">Phase 02: Enhanced Documentation</p>
+        </div>
+
+        <div class="doc-card" id="concept">
+            <div class="doc-card-header">
+                <h5>🧠 Main Concept - Mind Chaos Problem</h5><button class="btn btn-outline-secondary btn-toggle"
+                    onclick="toggle('concept')">Show Raw</button>
+            </div>
+            <div id="enhanced-concept" class="enhanced-view">
+                <p>I want to create an idea for solving the <strong>Mind Chaos Problem</strong>. While Notion, <span
+                        class="ai-refined" title="was: obsedian">Obsidian</span>, and Google Docs exist for creating
+                    documents when you know what to write and how to organize, there's another issue for me. In some use
+                    cases, the problem is that ideas, notes, or thoughts are scattered. For example: you write a note,
+                    then maybe some screenshots, maybe later a question, then another note, maybe after the note you get
+                    another question and understand and get the answer for the first question you wrote... etc.</p>
+            </div>
+            <div id="raw-concept" class="raw-view">Now I want to create an Idea to Solving Mind Chaos Problem, Notion
+                and obsedian and google docs exist if we want to create a Document and we know what to write and how to
+                organize , But For me there is another issue , in some use Cases , the issue if the ideas or notes or
+                thoughts are scattered (Example :write Note ,then maybe some screenshots ,maybe after a While write
+                question , maybe then write another note , maybe after the note I get another question and understand
+                and get the answer for the first question I wrote )..etc</div>
+        </div>
+
+        <div class="doc-card" id="usecases">
+            <div class="doc-card-header">
+                <h5>🎯 Use Cases</h5><button class="btn btn-outline-secondary btn-toggle"
+                    onclick="toggle('usecases')">Show Raw</button>
+            </div>
+            <div id="enhanced-usecases" class="enhanced-view">
+                <div id="uc-timeline"><strong>1. Life Events Timeline:</strong> <span class="ai-refined"
+                        title="was: remeber">Remember</span> your life: write an event from 1994, then 2011, then 1995.
+                    You memorize them randomly, but then you want an organized book with timeline and chapters.</div>
+                <div id="uc-course" class="mt-2"><strong>2. Course Notes:</strong> Watching a course and keeping notes,
+                    writing questions to search later, putting PDFs, templates, screenshots, or cards.</div>
+                <div id="uc-article" class="mt-2"><strong>3. Article Planning:</strong> Collecting ideas, stories, and
+                    everything related until it's ready to be an article.</div>
+                <div id="uc-cv" class="mt-2"><strong>4. CV Building:</strong> Keep <span class="ai-refined"
+                        title="was: wriitng">writing</span> things about your career.</div>
+            </div>
+            <div id="raw-usecases" class="raw-view">1- lets imagine you remeber your life ,write Event at 1994 , then
+                event at 2011 , then at 1995 , you just memorize them randomly , but then you want to write organized
+                book about the events in a certain timeline and Chapters with titles
+
+                2- watching a course and keep writing notes ,writing questions of things to search later, putting some
+                pdfs or templates or screenshots or cards for something ..etc
+
+                3- planning to write an article , and collecting ideas and stories and eveything related , till it is
+                ready to be an article
+
+                4- maybe also writing CV ? you keep wriitng things about the career ?</div>
+        </div>
+
+        <div class="doc-card" id="phases">
+            <div class="doc-card-header">
+                <h5>🔄 Project Phases</h5><button class="btn btn-outline-secondary btn-toggle"
+                    onclick="toggle('phases')">Show Raw</button>
+            </div>
+            <div id="enhanced-phases" class="enhanced-view">
+                <div class="highlight-box"><strong>Collect → Organize → Fix → Export</strong></div>
+                <div id="phase1" class="mt-3"><strong>Phase 1 - Collection:</strong> Allow free input mode. Notes should
+                    be <strong>RAW</strong>, not touched until input phase is done. Saved exactly as-is.</div>
+                <div id="phase2" class="mt-2"><strong>Phase 2 - Organizing:</strong> Group related content under
+                    titles/categories. AI suggests fixes (typos, <span class="ai-refined"
+                        title="was: redundnt">redundant</span> spaces). Edits have marks, raw data kept with
+                    strikethrough until user agrees.</div>
+                <div id="phase3" class="mt-2"><strong>Final Phase:</strong> AI adds sections (like <span
+                        class="ai-refined" title="was: Boosk">books</span>) with representation that content is
+                    AI-generated. AI can add links, suggestions, or answers.</div>
+            </div>
+            <div id="raw-phases" class="raw-view">PHASES are like this Collect → Organize → Fix → Export.
+
+                Phase 1 : The Idea first is to Allow free input mode, where i can keep writing small ( or big notes ) ,
+                and those notes or even files and documents should be RAW , Not touched till this input Phase is Done
+
+                Phase 2 : Organizing and Fixing ,and this Has lots of steps , for example two pieces of info one written
+                at the begining or the collect phase and one written at end of collect phase , they could be related and
+                grouped under some title or category
+
+                4- Final Phase ,is that AI will add sections ( like the sections in Boosk ) where there is
+                representation that this piece of paragpraph or whatever is AI</div>
+        </div>
+
+        <div class="doc-card" id="steps">
+            <div class="doc-card-header">
+                <h5>📈 Workflow Steps</h5><button class="btn btn-outline-secondary btn-toggle"
+                    onclick="toggle('steps')">Show Raw</button>
+            </div>
+            <div id="enhanced-steps" class="enhanced-view">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Action</th>
+                            <th>Edits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>Submit raw data</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Order data</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Group and label</td>
+                            <td>Headers only</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Flag gaps/redundancies</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Resolve flagged issues</td>
+                            <td>User action</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Approve final outline</td>
+                            <td>No</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="raw-steps" class="raw-view">0 — Submit raw data
+                1 — Order data (no text edits)
+                2 — Group and label (minor header edits only)
+                3 — Flag gaps, redundancies, unclear sections
+                4 — Resolve all flagged issues (user action required)
+                5 — Approve final outline</div>
+        </div>
+
+        <div class="doc-card" id="rules">
+            <div class="doc-card-header">
+                <h5>🔒 Workflow Rules</h5>
+            </div>
+            <div class="enhanced-view">
+                <p>🔒 No step proceeds until the current one is fully done and approved.</p>
+                <p>✍️ Only Step 2 allows edits — headers/titles only. Body text stays 100% original.</p>
+                <p>🚩 Step 4 flags must be resolved by you — no auto-fixing.</p>
+                <p>⏸️ Pause anytime. Resume later — progress is saved.</p>
+                <div class="highlight-box"><strong>USER CANNOT <span class="ai-refined"
+                            title="was: PROCEDD">PROCEED</span> to next step unless previous step is finished.</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="doc-card" id="questions">
+            <div class="doc-card-header">
+                <h5>❓ Open Questions</h5>
+            </div>
+            <div class="enhanced-view">
+                <div class="question-box"><strong>A:</strong> Is there something that exists (app or whatever) to do
+                    this?</div>
+                <div class="question-box"><strong>B:</strong> What is the best AI model to do this? Or are all equal?
+                </div>
+                <div class="question-box"><strong>C:</strong> What's the best option: coded project, Agent, custom GPT,
+                    CLI, or folder-based prompts with AI editor?</div>
+                <div class="question-box"><strong>New Data:</strong> What if user adds raw info after generating final
+                    data? Should we restart?</div>
+            </div>
+        </div>
+
+        <div class="doc-card" id="tools">
+            <div class="doc-card-header">
+                <h5>🔗 Competing Tools</h5>
+            </div>
+            <div class="enhanced-view">
+                <ul>
+                    <li><a href="https://www.craft.do/" target="_blank">Craft</a></li>
+                    <li><a href="https://github.com/Ionaru/easy-markdown-editor" target="_blank">Easy Markdown
+                            Editor</a></li>
+                    <li><a href="https://ui.toast.com/tui-editor" target="_blank">Toast UI Editor</a></li>
+                    <li><a href="https://github.com/ueberdosis/tiptap" target="_blank">Tiptap</a></li>
+                    <li><a href="https://saga.so/use-cases/students" target="_blank">Saga</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-card" id="testing">
+            <div class="doc-card-header">
+                <h5>📓 Testing Notes</h5><button class="btn btn-outline-secondary btn-toggle"
+                    onclick="toggle('testing')">Show Raw</button>
+            </div>
+            <div id="enhanced-testing" class="enhanced-view">
+                <ol>
+                    <li>Output is only text in readme, no checklists even if better as todo list</li>
+                    <li>What about flowcharts and other <span class="ai-refined"
+                            title="was: represetations">representations</span>?</li>
+                    <li>Phases should be sequential, no skip. AI replies with ONE word only (e.g., "<span
+                            class="ai-refined" title="was: Reveived">Received</span>")</li>
+                    <li>Need to know the document title first, not AI making it up</li>
+                    <li><span class="ai-refined" title="was: Anootation">Annotation</span>: bold, italic, Arabic support
+                    </li>
+                    <li>Big file "like a book" — possible?</li>
+                    <li>Images, media, attachments</li>
+                    <li>Code snippets in pretty images like HydePHP</li>
+                    <li>Remove duplicates later? Or keep?</li>
+                </ol>
+            </div>
+            <div id="raw-testing" class="raw-view">1- the shape of the output is only text in readme , no checklists
+                even if it is better to represent it the todo list shape
+                2- Well , since we talk about shapes , what about flow charts and other represetations too ?
+                3- I want those Phases "Collect → Organize → Fix → Export." Not escpaed , It is sequenctial one by one ,
+                no skipp unless unders some rules "fixing by AI for example " ,, Also for each phase AI reply with ONLY
+                one word , so if in Collect , it always hint that it is in collected mode or if receive data it says
+                "Reveived" Not bla bla at all
+                4- Before anything, there is a need to know the title of the document , not AI making it up
+                5- Anootation , or markup and making something bold or italic , or second langage in doc like Arabic too
+            </div>
+        </div>
+
+        <div class="doc-card" id="attachments">
+            <div class="doc-card-header">
+                <h5>📎 Attachments</h5>
+            </div>
+            <div class="enhanced-view"><img src="assets/2024-12-27_dwts/kb-block-editor.webp"
+                    alt="Block Editor Reference"></div>
+        </div>
+    </main>
+
+    <script>
+        function toggle(id) {
+            const enhanced = document.getElementById('enhanced-' + id);
+            const raw = document.getElementById('raw-' + id);
+            const btn = event.target;
+            if (raw.style.display === 'none' || raw.style.display === '') {
+                raw.style.display = 'block'; enhanced.style.display = 'none'; btn.textContent = 'Show Enhanced';
+            } else {
+                raw.style.display = 'none'; enhanced.style.display = 'block'; btn.textContent = 'Show Raw';
+            }
+        }
+    </script>
+</body>
+
+</html>
